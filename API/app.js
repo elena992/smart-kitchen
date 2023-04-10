@@ -8,11 +8,9 @@ const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const cors = require('cors');
 
-/* Db config */
 
 require('./config/db.config');
 
-/* Config express middlewares */
 
 const app = express();
 app.use(cors({
@@ -20,21 +18,17 @@ app.use(cors({
 }))
 
 app.use(logger('dev'));
-app.use(express.json()); // Para poder tener req.body en peticiones de tipo application/json
+app.use(express.json()); 
 
-/* Routes */
 
 const routes = require('./config/routes.config');
 app.use(routes);
 
-/* Handle errors */
 
-// Middleware para cuando no encuentra ruta
 app.use((req, res, next) => {
   next(createError(StatusCodes.NOT_FOUND, 'Route not found'))
 })
 
-// Middleware genérico de errores
 app.use((error, req, res, next) => {
   console.error(error);
 
@@ -67,7 +61,6 @@ app.use((error, req, res, next) => {
   res.status(error.status).json(data)
 })
 
-/* Server listening */
 
 const port = process.env.PORT || 3000
 
