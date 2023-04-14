@@ -30,3 +30,16 @@ module.exports.getUser = (req, res, next) => {
     })
     .catch(next)
 }
+module.exports.getCurrentUser = (req, res, next) => {
+  const userId = req.currentUserId;
+  User.findById(userId)
+  .populate('recipes')
+  .populate('recipesCreated')
+    .then(user => {
+      if (!user) {
+        throw createError(StatusCodes.NOT_FOUND, 'User not found')
+      }
+      res.json(user);
+    })
+    .catch(next);
+};

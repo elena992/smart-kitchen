@@ -24,7 +24,8 @@ const Navbar = () => {
             <Link to="/login" className="navbar-item">Log in</Link>
             <Link to="/signup" className="navbar-item">Sign up</Link>
             <Link to="/profile" className="navbar-item">Profile</Link>
-            <Link to="/recipes" className="navbar-item">Recipes</Link>
+            <Link to="/recipes" className="navbar-item">Create a Recipe</Link>
+            <Link to="/search-recipes" className="navbar-item">Search Recipes</Link>
           </div>
         </div>
       </nav>

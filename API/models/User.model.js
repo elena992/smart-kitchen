@@ -32,10 +32,32 @@ const UserSchema = new mongoose.Schema(
          },
         },
         {
-            timestamps: true,
+          timestamps: true,
+          toJSON: {
+            virtuals: true,
+            transform: (doc, ret) => {
+              delete ret.__v;
+              delete ret._id;
+              delete ret.password;
+            }
+          }
         }
-         
-)
+      )
+      
+      UserSchema.virtual('recipes', {
+        ref: 'Recipe',
+        foreignField: 'owner',
+        localField: '_id',
+        justOne: false
+      })
+      
+      UserSchema.virtual('recipesCreated', {
+        ref: 'Recipe',
+        foreignField: 'createdBy',
+        localField: '_id',
+        justOne: false
+      })
+      
 
 UserSchema.pre('save', function (next) {
     if (this.isModified('password')) {
