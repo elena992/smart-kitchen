@@ -7,7 +7,7 @@ export const recipeSchema = Yup.object({
   ingredients: Yup
     .string('Enter ingredients err')
     .required('Required'),
-    instructions: Yup
+  instructions: Yup
     .string('Enter instructions err')
     .required('Required'),
 })

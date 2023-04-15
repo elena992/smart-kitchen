@@ -6,19 +6,19 @@ module.exports.create = (req, res, next) => {
   if (req.file) {
     req.body.photo = req.file.path;
   }
-
-  const { name, instructions, ingredients, photo } = req.body;
+  console.log("********* ", req.body);
+  const { name, ingredients, instructions, photo } = req.body;
 
   Recipe.create({
     name,
-    instructions,
     ingredients,
+    instructions,
     owner: req.currentUserId,
     photo,
   })
     .then((recipe) => res.status(201).json(recipe))
     .catch(next);
-    };
+};
 
 module.exports.list = (req, res, next) => {
   Recipe.find()
@@ -33,4 +33,3 @@ module.exports.created = (req, res, next) => {
     .then((recipe) => res.json(recipe))
     .catch(next);
 };
-

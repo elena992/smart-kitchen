@@ -2,7 +2,7 @@ const router = require("express").Router();
 const authController = require("../controllers/auth.controller");
 const usersController = require("../controllers/user.controller");
 const recipesController = require("../controllers/recipes.controller");
-//const upload = require('../config/storage.config');
+const upload = require('./storage.config');
 
 
 const authMiddleware = require("../middlewares/auth.middleware");
@@ -22,8 +22,7 @@ router.get('/users/:id', usersController.getUser);
 
 /* Recipes */
 
-//router.post('/recipes', authMiddleware.isAuthenticated, upload.single('photo'), recipesController.create);
-router.post('/recipes', authMiddleware.isAuthenticated, recipesController.create);
+router.post('/recipes', authMiddleware.isAuthenticated, upload.single('photo'), recipesController.create);
 router.get('/recipes', recipesController.list);
 router.patch('/recipes/:id', authMiddleware.isAuthenticated, recipesController.created);
 
