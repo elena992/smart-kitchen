@@ -5,51 +5,54 @@ import Input from "../../components/Input/Input";
 import AuthContext from "../../contexts/AuthContext";
 import { signup as signupService } from "../../services/AuthService";
 import { setAccessToken } from "../../stores/AccessTokenStore";
-import { signupSchema} from "../../schemas/signup.schema";
+import { signupSchema } from "../../schemas/signup.schema";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
-    firstName: "",
-    lastName: "",
-    restaurantName: "",
-    email: "",
-    password: "",
-  };
+  firstName: "",
+  lastName: "",
+  restaurantName: "",
+  email: "",
+  password: "",
+};
 
-  const Signup = () => {
-    const { signup } = useContext(AuthContext);
-  
-    const {
-      values,
-      errors,
-      touched,
-      handleChange,
-      handleBlur,
-      isSubmitting,
-      handleSubmit,
-      setSubmitting,
-      setFieldError,
-    } = useFormik({
-      initialValues: initialValues,
-      validateOnBlur: true,
-      validateOnChange: false,
-      validationSchema: signupSchema,
-      onSubmit: (values) => {
-        signupService({ values.firstName, values.lastName, values.restaurantName, email: values.email, password: values.password })
-          .then((response) => {
-            signup(response.accessToken);
-          })
-          .catch((err) => {
-            if (err?.response?.data?.message) {
-              setFieldError("email", err?.response?.data?.message);
-            } else {
-              setFieldError("email", err.message);
-            }
-            setSubmitting(false);
-          });
-      },
-    });
-  
-return (
+
+
+const Signup = () => {
+  const navigate = useNavigate();
+
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    isSubmitting,
+    handleSubmit,
+    setSubmitting,
+    setFieldError,
+  } = useFormik({
+    initialValues: initialValues,
+    validateOnBlur: true,
+    validateOnChange: false,
+    validationSchema: signupSchema,
+    onSubmit: (values) => {
+      signupService(values)
+        .then((response) => {
+          navigate('/login');
+        })
+        .catch((err) => {
+          if (err?.response?.data?.message) {
+            setFieldError("email", err?.response?.data?.message);
+          } else {
+            setFieldError("email", err.message);
+          }
+          setSubmitting(false);
+        });
+    },
+  });
+
+  return (
     <div>
       <h1>Sign up</h1>
 
@@ -147,5 +150,4 @@ return (
   );
 };
 
-
-    export default Signup;
+export default Signup;
