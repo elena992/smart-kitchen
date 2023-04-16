@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { Formik } from "formik";
 import React, { useContext, useState } from "react";
 import FormControl from "../../components/FormControl/FormControl";
 import Input from "../../components/Input/Input";
@@ -24,6 +25,7 @@ const RecipeCreator = () => {
     handleSubmit,
     setSubmitting,
     setFieldValue,
+    resetForm,
   } = useFormik({
     initialValues: initialValues,
     validateOnBlur: true,
@@ -43,6 +45,7 @@ const RecipeCreator = () => {
       createRecipe(formData)
         .then((response) => {
           console.log(response);
+          resetForm();
         })
         .catch((err) => {
           console.log(err);
