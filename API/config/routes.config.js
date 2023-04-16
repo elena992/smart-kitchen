@@ -25,6 +25,6 @@ router.get('/users/:id', usersController.getUser);
 router.post('/recipes', authMiddleware.isAuthenticated, upload.single('photo'), recipesController.create);
 router.get('/recipes', recipesController.list);
 router.patch('/recipes/:id', authMiddleware.isAuthenticated, recipesController.created);
-router.post('/recipes/search', recipesController.searchRecipes)
+router.post('/recipes/search', authMiddleware.isAuthenticated, recipesController.searchRecipes)
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const Recipe = require("../models/Recipe.model");
 const createError = require("http-errors");
 const { StatusCodes } = require("http-status-codes");
-const axios = require('axios');
+const axios = require("axios");
 
 module.exports.create = (req, res, next) => {
   if (req.file) {
@@ -36,29 +36,27 @@ module.exports.created = (req, res, next) => {
 };
 
 module.exports.searchRecipes = (req, res, next) => {
-  const prompt = `Give me some recipe ideas using the following ingredients: ${req.body.ingredients}.`;
+  const { ingredients } = req.body;
+
+  const prompt = `Give me some recipe ideas using the following ingredients: ${ingredients}.`;
   const data = {
     prompt: prompt,
-    model: `text-davinci-003`,
-    max_tokens: 60,
-    n: 1,
-    stop: "\n",
-    temperature: 0.7,
-    top_p: 1,
-    frequency_penalty: 0,
-    presence_penalty: 0,
+    model: "text-davinci-003",
+    max_tokens: 5,
+    temperature: 0,
   };
-  axios.post("https://api.openai/v1/completions", data, {
+
+  axios
+    .post("https://api.openai.com/v1/completions", data, {
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
     })
     .then((response) => {
-      const result = response.data.choices[0].text.trim();
-      res.json({ recipes: result });
+      const result = response.data.choices[0].text;
+      res.json({ result });
     })
     .catch((error) => {
-      next(error)
+      next(error);
     });
 };
