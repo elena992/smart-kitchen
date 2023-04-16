@@ -39,21 +39,24 @@ function SearchRecipes() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Buscando recetas para:", ingredients);
-
-    searchRecipes(ingredients)
-      .then((data) => {
-        console.log(data.result);
-        if (data && data.result) {
-          setRecipes(data.result);
-        } else {
-          setError("Invalid response from API");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setError("Error fetching data: " + error);
-      });
+    if (ingredients === "") {
+      setError("Please enter ingredients");
+    } else {
+      searchRecipes(ingredients)
+        .then((data) => {
+          console.log(data.result);
+          if (data && data.result) {
+            setRecipes(data.result);
+            setIngredients("");
+          } else {
+            setError("Invalid response from API");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setError("Error fetching data: " + error);
+        });
+    }
   };
 
   return (
@@ -66,11 +69,13 @@ function SearchRecipes() {
         <button type="submit">Submit</button>
       </form>
       {error && <p className="error">{error}</p>}
-      <div className="card h-100 p-2">
-        <div className="card-body">
-          <h5 className="card-title text-body">{recipe}</h5>
+      {recipe && (
+        <div className="card h-100 p-2">
+          <div className="card-body">
+            <h5 className="card-title text-body">{recipe}</h5>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
