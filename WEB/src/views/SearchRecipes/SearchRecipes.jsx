@@ -67,12 +67,12 @@ function SearchRecipes() {
       </form>
       {error && <p className="error">{error}</p>}
       <div className="card h-100 p-2">
-      <div className="card-body">
-        <h5 className="card-title text-body">{recipe}</h5>
+        <div className="card-body">
+          <h5 className="card-title text-body">{recipe}</h5>
+        </div>
       </div>
     </div>
-    </div>
   );
-  }
+}
 
 export default SearchRecipes;
