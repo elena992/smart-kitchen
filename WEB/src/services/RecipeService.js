@@ -10,3 +10,5 @@ export const createRecipe = (recipe) =>
 export const listRecipes = () => unauthenticatedHttp.get("/recipes");
 
 export const createdRecipe = (id) => authenticatedHttp.patch(`/recipes/${id}`);
+
+export const searchRecipes = (ingredients) => authenticatedHttp.post("/recipes/search", ingredients);

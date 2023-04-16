@@ -103,20 +103,20 @@ const RecipeCreator = () => {
           />
         </FormControl>
         <FormControl
-            text="Photos"
-            error={touched.photos && errors.photos}
-            htmlFor="photos"
-          >
-            <input
-              id="photo"
-              name="photo"
-              type="file"
-              multiple
-              onChange={(event) => {
-                setFieldValue("photo", event.currentTarget.files[0]);
-              }}
-            />
-         </FormControl> 
+          text="Photos"
+          error={touched.photos && errors.photos}
+          htmlFor="photos"
+        >
+          <input
+            id="photo"
+            name="photo"
+            type="file"
+            multiple
+            onChange={(event) => {
+              setFieldValue("photo", event.currentTarget.files[0]);
+            }}
+          />
+        </FormControl>
 
         <button
           className="btn btn-primary"

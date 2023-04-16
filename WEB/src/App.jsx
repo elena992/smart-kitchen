@@ -29,7 +29,11 @@ function App() {
               <RecipeCreator />
             </ProtectedRoute>
           } />
-           <Route path="recipes/search" element={<SearchRecipes />} />
+           <Route path="recipes/search" element={
+            <ProtectedRoute>
+              <SearchRecipes />
+            </ProtectedRoute>
+            } />
         </Routes>
       </div>
     </div>
