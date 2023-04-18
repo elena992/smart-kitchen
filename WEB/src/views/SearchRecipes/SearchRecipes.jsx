@@ -2,35 +2,12 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { searchRecipes } from "../../services/RecipeService";
 
-/*const [data, setData] = useState([]);
 
-useEffect(() => {
-    axios.get('https://api.openai.com')
-      .then(response => {
-        setData(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
-  
-
-const SearchRecipes = () => {
-
-    return (
-        <div className="api-recipes" style={{ backgroundColor: 'purple' }}>
-       <div className="container">
-        <h1>Find the best recipe</h1>
-        <p>Hello</p>
-       </div>
-      </div>
-
-    )
-} */
 
 function SearchRecipes() {
   const [ingredients, setIngredients] = useState("");
-  const [recipe, setRecipes] = useState("");
+  const [recipe, setRecipe] = useState(null);
+
   const [error, setError] = useState(null);
 
   const handleInputChange = (event) => {
@@ -44,10 +21,10 @@ function SearchRecipes() {
     } else {
       searchRecipes(ingredients)
         .then((data) => {
-          console.log(data.result);
+          let json = JSON.parse(data.result);
+
           if (data && data.result) {
-            setRecipes(data.result);
-            setIngredients("");
+            setRecipe(json);
           } else {
             setError("Invalid response from API");
           }
@@ -72,7 +49,35 @@ function SearchRecipes() {
       {recipe && (
         <div className="card h-100 p-2">
           <div className="card-body">
-            <h5 className="card-title text-body">{recipe}</h5>
+            <h5 className="card-title text-body">{recipe.name}</h5>
+          </div>
+        </div>
+      )}
+      {recipe && (
+        <div className="card h-100 p-2">
+          <div className="card-body">
+            <h5 className="card-title text-body">{recipe.servings}</h5>
+          </div>
+        </div>
+      )}
+      {recipe && (
+        <div className="card h-100 p-2">
+          <div className="card-body">
+            <h5 className="card-title text-body">{recipe.ingredients}</h5>
+          </div>
+        </div>
+      )}
+      {recipe && (
+        <div className="card h-100 p-2">
+          <div className="card-body">
+            <h5 className="card-title text-body">{recipe.instructions}</h5>
+          </div>
+        </div>
+      )}
+      {recipe && (
+        <div className="card h-100 p-2">
+          <div className="card-body">
+            <h5 className="card-title text-body">{recipe.notes}</h5>
           </div>
         </div>
       )}
