@@ -2,37 +2,12 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { searchRecipes } from "../../services/RecipeService";
 
-/*const [data, setData] = useState([]);
 
-useEffect(() => {
-    axios.get('https://api.openai.com')
-      .then(response => {
-        setData(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
-  
-
-const SearchRecipes = () => {
-
-    return (
-        <div className="api-recipes" style={{ backgroundColor: 'purple' }}>
-       <div className="container">
-        <h1>Find the best recipe</h1>
-        <p>Hello</p>
-       </div>
-      </div>
-
-    )
-} */
 
 function SearchRecipes() {
   const [ingredients, setIngredients] = useState("");
-  const [recipeName, setRecipeName] = useState("");
-  const [recipeIngredients, setRecipeIngredients] = useState("");
-  const [recipeInstructions, setRecipeInstructions] = useState("");
+  const [recipe, setRecipe] = useState(null);
+
   const [error, setError] = useState(null);
 
   const handleInputChange = (event) => {
@@ -49,10 +24,7 @@ function SearchRecipes() {
           let json = JSON.parse(data.result);
 
           if (data && data.result) {
-            setRecipeName(json.name);
-            setRecipeIngredients(json.ingredients);
-            setRecipeInstructions(json.instructions);
-            setIngredients("");
+            setRecipe(json);
           } else {
             setError("Invalid response from API");
           }
@@ -74,24 +46,38 @@ function SearchRecipes() {
         <button type="submit">Submit</button>
       </form>
       {error && <p className="error">{error}</p>}
-      {recipeName && (
+      {recipe && (
         <div className="card h-100 p-2">
           <div className="card-body">
-            <h5 className="card-title text-body">{recipeName}</h5>
+            <h5 className="card-title text-body">{recipe.name}</h5>
           </div>
         </div>
       )}
-      {recipeIngredients && (
+      {recipe && (
         <div className="card h-100 p-2">
           <div className="card-body">
-            <h5 className="card-title text-body">{recipeIngredients}</h5>
+            <h5 className="card-title text-body">{recipe.servings}</h5>
           </div>
         </div>
       )}
-      {recipeInstructions && (
+      {recipe && (
         <div className="card h-100 p-2">
           <div className="card-body">
-            <h5 className="card-title text-body">{recipeInstructions}</h5>
+            <h5 className="card-title text-body">{recipe.ingredients}</h5>
+          </div>
+        </div>
+      )}
+      {recipe && (
+        <div className="card h-100 p-2">
+          <div className="card-body">
+            <h5 className="card-title text-body">{recipe.instructions}</h5>
+          </div>
+        </div>
+      )}
+      {recipe && (
+        <div className="card h-100 p-2">
+          <div className="card-body">
+            <h5 className="card-title text-body">{recipe.notes}</h5>
           </div>
         </div>
       )}
