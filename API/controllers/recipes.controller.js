@@ -7,7 +7,7 @@ module.exports.create = (req, res, next) => {
   if (req.file) {
     req.body.photo = req.file.path;
   }
-  console.log("********* ", req.body);
+
   const { name, ingredients, instructions, photo } = req.body;
 
   Recipe.create({
@@ -27,10 +27,36 @@ module.exports.list = (req, res, next) => {
     .catch(next);
 };
 
+module.exports.getMyRecipes = (req, res, next) => {
+  Recipe.find({ owner: req.currentUserId })
+    .then(recipes => res.json(recipes))
+    .catch(error => next(error));
+};
+
+module.exports.edit = (req, res, next) => {
+  const { id } = req.params;
+
+  Recipe.findByIdAndUpdate(id, req.body, { new: true })
+    .then((updatedRecipe) => res.json(updatedRecipe))
+    .catch(next);
+};
+
+module.exports.delete = (req, res, next) => {
+  const { id } = req.params;
+
+  Recipe.findOneAndDelete({ _id: id, owner: req.currentUserId })
+    .then((deletedRecipe) => {
+      if (!deletedRecipe) {
+        return res.status(404).json({ error: 'Recipe not found' });
+      }
+      res.status(204).end();
+    })
+    .catch(next);
+};
+
 module.exports.created = (req, res, next) => {
   const { id } = req.params;
-  console.log("id", id);
-  Recipe.findByIdAndUpdate(id, { createdBy: req.currentUserId }, { new: true })
+  Recipe.findByIdAndUpdate(id, { owner: req.currentUserId }, { new: true })
     .then((recipe) => res.json(recipe))
     .catch(next);
 };

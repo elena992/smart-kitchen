@@ -66,7 +66,7 @@ function SearchRecipes() {
           Type your ingredients to get your recipe
           <input type="text" value={ingredients} onChange={handleInputChange} />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit">Search</button>
       </form>
       {error && <p className="error">{error}</p>}
       {recipe && (

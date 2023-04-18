@@ -4,8 +4,9 @@ import Navbar from './components/Navbar/Navbar';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import AuthContext, { AuthProvider } from './contexts/AuthContext';
 import Login from './views/Login/Login';
+import MyRecipes from './views/MyRecipes/MyRecipes';
 import Profile from './views/Profile/Profile';
-import RecipeCreator from './views/Recipes/RecipeCreator';
+import RecipeCreator from './views/RecipeCreator/RecipeCreator';
 import SearchRecipes from './views/SearchRecipes/SearchRecipes';
 import Signup from './views/Signup/Signup';
 
@@ -32,6 +33,11 @@ function App() {
            <Route path="recipes/search" element={
             <ProtectedRoute>
               <SearchRecipes />
+            </ProtectedRoute>
+            } />
+           <Route path="recipes/:id" element={
+            <ProtectedRoute>
+              <MyRecipes />
             </ProtectedRoute>
             } />
         </Routes>
