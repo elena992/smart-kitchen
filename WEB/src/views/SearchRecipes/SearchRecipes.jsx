@@ -30,7 +30,9 @@ const SearchRecipes = () => {
 
 function SearchRecipes() {
   const [ingredients, setIngredients] = useState("");
-  const [recipe, setRecipes] = useState("");
+  const [recipeName, setRecipeName] = useState("");
+  const [recipeIngredients, setRecipeIngredients] = useState("");
+  const [recipeInstructions, setRecipeInstructions] = useState("");
   const [error, setError] = useState(null);
 
   const handleInputChange = (event) => {
@@ -44,9 +46,12 @@ function SearchRecipes() {
     } else {
       searchRecipes(ingredients)
         .then((data) => {
-          console.log(data.result);
+          let json = JSON.parse(data.result);
+
           if (data && data.result) {
-            setRecipes(data.result);
+            setRecipeName(json.name);
+            setRecipeIngredients(json.ingredients);
+            setRecipeInstructions(json.instructions);
             setIngredients("");
           } else {
             setError("Invalid response from API");
@@ -69,10 +74,24 @@ function SearchRecipes() {
         <button type="submit">Submit</button>
       </form>
       {error && <p className="error">{error}</p>}
-      {recipe && (
+      {recipeName && (
         <div className="card h-100 p-2">
           <div className="card-body">
-            <h5 className="card-title text-body">{recipe}</h5>
+            <h5 className="card-title text-body">{recipeName}</h5>
+          </div>
+        </div>
+      )}
+      {recipeIngredients && (
+        <div className="card h-100 p-2">
+          <div className="card-body">
+            <h5 className="card-title text-body">{recipeIngredients}</h5>
+          </div>
+        </div>
+      )}
+      {recipeInstructions && (
+        <div className="card h-100 p-2">
+          <div className="card-body">
+            <h5 className="card-title text-body">{recipeInstructions}</h5>
           </div>
         </div>
       )}
