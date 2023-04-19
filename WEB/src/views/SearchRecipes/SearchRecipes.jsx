@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { searchRecipes } from "../../services/RecipeService";
+import RecipeCard from "../../components/RecipeCard/RecipeCard";
 
 function SearchRecipes() {
   const [ingredients, setIngredients] = useState("");
@@ -44,6 +45,9 @@ function SearchRecipes() {
         <button type="submit">Submit</button>
       </form>
       {error && <p className="error">{error}</p>}
+
+      {recipe && <RecipeCard recipe={recipe} />}
+
       {recipe && (
         <div className="card h-100 p-2">
           <div className="card-body">
