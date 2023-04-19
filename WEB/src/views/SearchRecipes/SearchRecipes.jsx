@@ -2,12 +2,9 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { searchRecipes } from "../../services/RecipeService";
 
-
-
 function SearchRecipes() {
   const [ingredients, setIngredients] = useState("");
   const [recipe, setRecipe] = useState(null);
-
   const [error, setError] = useState(null);
 
   const handleInputChange = (event) => {
@@ -25,6 +22,7 @@ function SearchRecipes() {
 
           if (data && data.result) {
             setRecipe(json);
+            setIngredients("");
           } else {
             setError("Invalid response from API");
           }
