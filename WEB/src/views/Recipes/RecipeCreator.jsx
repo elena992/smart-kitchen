@@ -38,13 +38,9 @@ const RecipeCreator = () => {
       formData.append("ingredients", values.ingredients);
       formData.append("instructions", values.instructions);
       formData.append("photo", values.photo);
-
-      console.log("values", values);
-      console.log(formData.get("name"));
-
+      console.log(formData);
       createRecipe(formData)
         .then((response) => {
-          console.log(response);
           resetForm();
         })
         .catch((err) => {
@@ -85,7 +81,7 @@ const RecipeCreator = () => {
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.ingredients}
-            error={touched.ingredients && errors.pingredients}
+            error={touched.ingredients && errors.ingredients}
             placeholder="Enter recipe ingredients"
           />
         </FormControl>
