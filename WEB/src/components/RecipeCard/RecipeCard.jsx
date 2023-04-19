@@ -16,19 +16,10 @@ const RecipeCard = ({ recipe, onEdit, onDelete }) => {
         <p className="card-text">{recipe.ingredients}</p>
         <p className="card-text">{recipe.instructions}</p>
         <p className="card-text">{recipe.notes}</p>
-        <div className="d-flex justify-content-between">
-          <button
-            className="btn btn-primary"
-            onClick={() => onEdit(recipe)}
-          >
-            Edit
-          </button>
-          <button className="btn btn-danger" onClick={() => onDelete(recipe)}>
-            Delete
-          </button>
-        </div>
-      </div>
+      
     </div>
+    </div>
+
   );
 };
 
