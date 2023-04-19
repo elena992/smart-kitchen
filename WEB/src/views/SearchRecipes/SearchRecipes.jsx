@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { searchRecipes } from "../../services/RecipeService";
+import RecipeCard from "../../components/RecipeCard/RecipeCard";
+import "./SearchRecipes.css"
 
 function SearchRecipes() {
   const [ingredients, setIngredients] = useState("");
@@ -34,53 +36,34 @@ function SearchRecipes() {
     }
   };
 
-  return (
-    <div className="">
-      <form onSubmit={handleSubmit}>
-        <label>
-          Type your ingredients to get your recipe
-          <input type="text" value={ingredients} onChange={handleInputChange} />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-      {error && <p className="error">{error}</p>}
-      {recipe && (
-        <div className="card h-100 p-2">
-          <div className="card-body">
-            <h5 className="card-title text-body">{recipe.name}</h5>
-          </div>
-        </div>
-      )}
-      {recipe && (
-        <div className="card h-100 p-2">
-          <div className="card-body">
-            <h5 className="card-title text-body">{recipe.servings}</h5>
-          </div>
-        </div>
-      )}
-      {recipe && (
-        <div className="card h-100 p-2">
-          <div className="card-body">
-            <h5 className="card-title text-body">{recipe.ingredients}</h5>
-          </div>
-        </div>
-      )}
-      {recipe && (
-        <div className="card h-100 p-2">
-          <div className="card-body">
-            <h5 className="card-title text-body">{recipe.instructions}</h5>
-          </div>
-        </div>
-      )}
-      {recipe && (
-        <div className="card h-100 p-2">
-          <div className="card-body">
-            <h5 className="card-title text-body">{recipe.notes}</h5>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
+   const handleSave = () => {
+      setSavedRecipes(savedRecipes => [...savedRecipes, recipe]);
+    };
 
-export default SearchRecipes;
+    return (
+      <div className="">
+        <form onSubmit={handleSubmit}>
+          <label>
+            Type your ingredients to get your recipe
+            <input type="text" value={ingredients} onChange={handleInputChange} />
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+        {error && <p className="error">{error}</p>}
+  
+        {recipe && (
+          <div>
+            <RecipeCard recipe={recipe}>
+              <div className="d-flex justify-content-between">
+                <button className="save-button" onClick={handleSave}>
+                  Save
+                </button>
+              </div>
+            </RecipeCard>
+          </div>
+        )}
+      </div>
+    );
+  }
+  
+  export default SearchRecipes;
