@@ -1,6 +1,6 @@
 import React from "react";
 
-const RecipeCard = ({ recipe, onEdit, onDelete }) => {
+const RecipeCard = ({ recipe, onEdit, onDelete, children }) => {
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img
@@ -16,7 +16,7 @@ const RecipeCard = ({ recipe, onEdit, onDelete }) => {
         <p className="card-text">{recipe.ingredients}</p>
         <p className="card-text">{recipe.instructions}</p>
         <p className="card-text">{recipe.notes}</p>
-      
+        {children}
     </div>
     </div>
 
