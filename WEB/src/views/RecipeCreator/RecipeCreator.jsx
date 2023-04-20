@@ -34,14 +34,6 @@ const RecipeCreator = () => {
     validateOnChange: false,
     validationSchema: recipeSchema,
     onSubmit: (values) => {
-      console.log(values);
-      const recipe = {
-        name: values.name,
-        servings: values.servings,
-        ingredients: values.ingredients.split(" "),
-        instructions: values.instructions.split("\n"),
-        notes: values.notes,
-      };
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("servings", values.servings);
