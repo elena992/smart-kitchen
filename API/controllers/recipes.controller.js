@@ -7,7 +7,6 @@ module.exports.create = (req, res, next) => {
   if (req.file) {
     req.body.photo = req.file.path;
   }
-  console.log(req.body);
   const { name, servings, ingredients, instructions, photo, notes } = req.body;
 
   Recipe.create({
