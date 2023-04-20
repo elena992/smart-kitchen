@@ -5,7 +5,7 @@ const authenticatedHttp = createHttp(true);
 const unauthenticatedHttp = createHttp(false);
 
 export const createRecipe = (recipe) =>
-  authenticatedHttp.post("/recipes", recipe);
+  authenticatedHttp.post("/create-recipe", recipe);
 
 export const listRecipes = () => unauthenticatedHttp.get("/recipes");
 

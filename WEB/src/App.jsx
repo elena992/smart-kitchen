@@ -28,7 +28,7 @@ function App() {
             }
           />
           <Route
-            path="recipes"
+            path="create-recipe"
             element={
               <ProtectedRoute>
                 <RecipeCreator />
@@ -43,11 +43,11 @@ function App() {
               </ProtectedRoute>
             }
           />
-            <Route
+          <Route
             path="my-recipes"
             element={
               <ProtectedRoute>
-                <MyRecipes/>
+                <MyRecipes />
               </ProtectedRoute>
             }
           />

@@ -26,7 +26,7 @@ router.get("/users/:id", usersController.getUser);
 /* Recipes */
 
 router.post(
-  "/recipes",
+  "/create-recipe",
   authMiddleware.isAuthenticated,
   upload.single("photo"),
   recipesController.create

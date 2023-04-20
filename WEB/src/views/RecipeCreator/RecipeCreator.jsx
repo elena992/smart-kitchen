@@ -34,11 +34,13 @@ const RecipeCreator = () => {
     validateOnChange: false,
     validationSchema: recipeSchema,
     onSubmit: (values) => {
+      console.log(values);
       const recipe = {
         name: values.name,
         servings: values.servings,
         ingredients: values.ingredients.split(" "),
         instructions: values.instructions.split("\n"),
+        photo: values.photo,
         notes: values.notes,
       };
       createRecipe(recipe)
@@ -135,9 +137,9 @@ const RecipeCreator = () => {
           />
         </FormControl>
         <FormControl
-          text="Image"
-          error={touched.photos && errors.photos}
-          htmlFor="photos"
+          text="Photo"
+          error={touched.photo && errors.photo}
+          htmlFor="photo"
         >
           <input
             id="photo"
