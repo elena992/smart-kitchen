@@ -37,7 +37,7 @@ module.exports.getRecipesByUser = (req, res, next) => {
 
 module.exports.searchRecipes = (req, res, next) => {
   const { ingredients } = req.body;
-  const prompt = `Give me some recipe ideas using the following ingredients: ${ingredients} in this {"name":"","servings":0,"ingredients":[""],"instructions":"","notes":""} json format.`;
+  const prompt = `Give me some recipe ideas using the following ingredients: ${ingredients} in this {"name":"","servings":0,"ingredients":[""],"instructions":[""],"notes":""} json format.`;
   const data = {
     prompt: prompt,
     model: "text-davinci-003",
