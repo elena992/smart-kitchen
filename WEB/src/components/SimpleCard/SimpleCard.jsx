@@ -1,6 +1,7 @@
 import React from "react";
 
 const SimpleCard = ({ recipe, children }) => {
+  console.log(recipe.photo);
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img
@@ -9,9 +10,8 @@ const SimpleCard = ({ recipe, children }) => {
         alt={recipe.name}
         style={{ height: "180px", objectFit: "cover" }}
       />
-        {children}
+      {children}
     </div>
-
   );
 };
 
