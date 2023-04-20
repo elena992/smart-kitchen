@@ -9,8 +9,10 @@ export const createRecipe = (recipe) =>
 
 export const listRecipes = () => unauthenticatedHttp.get("/recipes");
 
+// este service lo uso para la vista de my-recipes y detail-recipe
 export const getRecipesByCurrentUser = () =>
   authenticatedHttp.get(`/my-recipes`);
 
 export const searchRecipes = (ingredients) =>
   authenticatedHttp.post("/recipes/search", { ingredients });
+

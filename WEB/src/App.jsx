@@ -9,6 +9,7 @@ import RecipeCreator from "./views/RecipeCreator/RecipeCreator";
 import SearchRecipes from "./views/SearchRecipes/SearchRecipes";
 import Signup from "./views/Signup/Signup";
 import MyRecipes from "./views/MyRecipes/MyRecipes";
+import DetailRecipe from "./views/DetailRecipe/DetailRecipe";
 
 function App() {
   return (
@@ -48,6 +49,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <MyRecipes />
+              </ProtectedRoute>
+            }
+          />
+            <Route
+            path="detail-recipe"
+            element={
+              <ProtectedRoute>
+                <DetailRecipe />
               </ProtectedRoute>
             }
           />
