@@ -40,7 +40,6 @@ const RecipeCreator = () => {
         servings: values.servings,
         ingredients: values.ingredients.split(" "),
         instructions: values.instructions.split("\n"),
-        photo: values.photo,
         notes: values.notes,
       };
       createRecipe(recipe)

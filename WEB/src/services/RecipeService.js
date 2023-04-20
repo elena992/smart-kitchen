@@ -9,7 +9,7 @@ export const createRecipe = (recipe) =>
 
 export const listRecipes = () => unauthenticatedHttp.get("/recipes");
 
-export const getRecipesByCurrentUser = (userId) =>
+export const getRecipesByCurrentUser = () =>
   authenticatedHttp.get(`/my-recipes`);
 
 export const searchRecipes = (ingredients) =>
