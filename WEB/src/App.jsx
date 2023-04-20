@@ -8,6 +8,7 @@ import Profile from "./views/Profile/Profile";
 import RecipeCreator from "./views/RecipeCreator/RecipeCreator";
 import SearchRecipes from "./views/SearchRecipes/SearchRecipes";
 import Signup from "./views/Signup/Signup";
+import MyRecipes from "./views/MyRecipes/MyRecipes";
 
 function App() {
   return (
@@ -39,6 +40,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <SearchRecipes />
+              </ProtectedRoute>
+            }
+          />
+            <Route
+            path="myrecipes"
+            element={
+              <ProtectedRoute>
+                <MyRecipes/>
               </ProtectedRoute>
             }
           />
