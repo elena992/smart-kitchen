@@ -1,21 +1,19 @@
 const Recipe = require("../models/Recipe.model");
-const createError = require("http-errors");
-const { StatusCodes } = require("http-status-codes");
 const axios = require("axios");
 
 module.exports.create = (req, res, next) => {
   if (req.file) {
     req.body.photo = req.file.path;
   }
-  console.log("********* ", req.body);
-  const { name, ingredients, instructions, photo } = req.body;
-
+  const { name, servings, ingredients, instructions, photo, notes } = req.body;
   Recipe.create({
     name,
+    servings,
     ingredients,
     instructions,
-    owner: req.currentUserId,
     photo,
+    notes,
+    owner: req.currentUserId,
   })
     .then((recipe) => res.status(201).json(recipe))
     .catch(next);
