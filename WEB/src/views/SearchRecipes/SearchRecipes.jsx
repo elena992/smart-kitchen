@@ -8,6 +8,7 @@ function SearchRecipes() {
   const [ingredients, setIngredients] = useState("");
   const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState(null);
+  const [savedRecipes, setSavedRecipes] = useState([]);
 
   const handleInputChange = (event) => {
     setIngredients(event.target.value);
@@ -36,9 +37,10 @@ function SearchRecipes() {
     }
   };
 
-   const handleSave = () => {
-      setSavedRecipes(savedRecipes => [...savedRecipes, recipe]);
-    };
+  const handleSave = () => {
+    setSavedRecipes(savedRecipes => [...savedRecipes, <RecipeCard recipe={recipe} />]);
+    console.log('Recipe saved:', recipe);
+  };
 
     return (
       <div className="">
@@ -47,7 +49,7 @@ function SearchRecipes() {
             Type your ingredients to get your recipe
             <input type="text" value={ingredients} onChange={handleInputChange} />
           </label>
-          <button type="submit">Submit</button>
+          <button type="submit">Search</button>
         </form>
         {error && <p className="error">{error}</p>}
   
@@ -55,12 +57,16 @@ function SearchRecipes() {
           <div className="">
             <RecipeCard recipe={recipe}>
               <div className="d-flex justify-content-between">
-                <button className="save-button" onClick={handleSave}>
-                  Save
-                </button>
-              </div>
-            </RecipeCard>
-          </div>
+              <button
+              className="btn btn-primary"
+                onClick={handleSave}
+                disabled={!recipe}
+                >
+                Save
+              </button>
+            </div>
+          </RecipeCard>
+        </div>
         )}
       </div>
     );

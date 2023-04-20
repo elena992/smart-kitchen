@@ -27,7 +27,7 @@ module.exports.list = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.created = (req, res, next) => {
+module.exports.getRecipesByUser = (req, res, next) => {
   const { id } = req.params;
   console.log("id", id);
   Recipe.findByIdAndUpdate(id, { createdBy: req.currentUserId }, { new: true })

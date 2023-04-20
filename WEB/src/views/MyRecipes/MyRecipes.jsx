@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getRecipesByUser } from "../../services/RecipeService";
-import RecipeCard from "../RecipeCard/RecipeCard";
 
 const MyRecipes = () => {
   const [recipes, setRecipes] = useState([]);

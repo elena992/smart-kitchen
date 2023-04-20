@@ -8,6 +8,9 @@ const RecipeSchema = new mongoose.Schema({
     type: String,
     required: [true, REQUIRED_FIELD],
   },
+  servings: {
+    type: Number,
+  },
   ingredients: {
     type: String,
     required: [true, REQUIRED_FIELD],
@@ -17,6 +20,9 @@ const RecipeSchema = new mongoose.Schema({
     required: [true, REQUIRED_FIELD],
   },
    photo: {
+    type: String,
+   },
+    notes: {
     type: String,
   },
   owner: {
