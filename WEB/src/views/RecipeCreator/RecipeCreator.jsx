@@ -42,7 +42,14 @@ const RecipeCreator = () => {
         instructions: values.instructions.split("\n"),
         notes: values.notes,
       };
-      createRecipe(recipe)
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("servings", values.servings);
+      formData.append("ingredients", values.ingredients);
+      formData.append("instructions", values.instructions);
+      formData.append("notes", values.notes);
+      formData.append("photo", values.photo);
+      createRecipe(formData)
         .then((response) => {
           resetForm();
         })
