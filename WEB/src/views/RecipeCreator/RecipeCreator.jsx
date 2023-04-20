@@ -9,8 +9,10 @@ import "./RecipeCreator.css";
 
 const initialValues = {
   name: "",
+  servings: "",
   ingredients: "",
   instructions: "",
+  notes: "",
   photo: "",
 };
 
@@ -32,14 +34,14 @@ const RecipeCreator = () => {
     validateOnChange: false,
     validationSchema: recipeSchema,
     onSubmit: (values) => {
-      const formData = new FormData();
-
-      formData.append("name", values.name);
-      formData.append("ingredients", values.ingredients);
-      formData.append("instructions", values.instructions);
-      formData.append("photo", values.photo);
-      console.log(formData);
-      createRecipe(formData)
+      const recipe = {
+        name: values.name,
+        servings: values.servings,
+        ingredients: values.ingredients.split(" "),
+        instructions: values.instructions.split("\n"),
+        notes: values.notes,
+      };
+      createRecipe(recipe)
         .then((response) => {
           resetForm();
         })
@@ -66,7 +68,22 @@ const RecipeCreator = () => {
             onBlur={handleBlur}
             value={values.name}
             error={touched.name && errors.name}
-            placeholder="Enter recipe name"
+            placeholder="Enter recipe name..."
+          />
+        </FormControl>
+        <FormControl
+          text="Servings"
+          error={touched.servings && errors.servings}
+          htmlFor="servings"
+        >
+          <Input
+            id="servings"
+            name="servings"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.servings}
+            error={touched.servings && errors.servings}
+            placeholder="Enter recipe servings..."
           />
         </FormControl>
         <FormControl
@@ -82,7 +99,7 @@ const RecipeCreator = () => {
             onBlur={handleBlur}
             value={values.ingredients}
             error={touched.ingredients && errors.ingredients}
-            placeholder="Enter recipe ingredients"
+            placeholder="Enter recipe ingredients..."
           />
         </FormControl>
         <FormControl
@@ -98,11 +115,27 @@ const RecipeCreator = () => {
             onBlur={handleBlur}
             value={values.instructions}
             error={touched.instructions && errors.instructions}
-            placeholder="Enter recipe instructions"
+            placeholder="Enter recipe instructions..."
           />
         </FormControl>
         <FormControl
-          text="Photos"
+          text="Notes"
+          error={touched.notes && errors.notes}
+          htmlFor="notes"
+        >
+          <Input
+            id="notes"
+            name="notes"
+            type="text"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.notes}
+            error={touched.notes && errors.notes}
+            placeholder="Enter recipe notes..."
+          />
+        </FormControl>
+        <FormControl
+          text="Image"
           error={touched.photos && errors.photos}
           htmlFor="photos"
         >

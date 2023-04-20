@@ -1,59 +1,58 @@
-import { createContext, useCallback, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { getAccessToken, setAccessToken } from "../stores/AccessTokenStore";
-import { getCurrentUser as getCurrentUserService } from '../services/UserService'
+import { getCurrentUser as getCurrentUserService } from "../services/UserService";
 import { useNavigate } from "react-router-dom";
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 export default AuthContext;
 
-
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [currentUser, setCurrentUser] = useState(null); 
-  const [isAuthLoaded, setIsAuthLoaded] = useState(false); 
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isAuthLoaded, setIsAuthLoaded] = useState(false);
 
   const getCurrentUser = useCallback((callback) => {
-    getCurrentUserService() 
-      .then(user => {
-        console.log(user); 
-        setCurrentUser(user)
-        setIsAuthLoaded(true)
-        callback && callback() 
-      })
-  }, [])
+    getCurrentUserService().then((user) => {
+      setCurrentUser(user);
+      setIsAuthLoaded(true);
+      callback && callback();
+    });
+  }, []);
 
+  const login = useCallback(
+    (token) => {
+      const navigateToProfile = () => {
+        navigate("/profile");
+      };
 
-  const login = useCallback((token) => {
-    const navigateToProfile = () => {
-      navigate('/profile')
-    }
-   
-    setAccessToken(token);
-    getCurrentUser(navigateToProfile)
+      setAccessToken(token);
+      getCurrentUser(navigateToProfile);
+    },
+    [getCurrentUser]
+  );
 
-  }, [getCurrentUser])
-
-
-  useEffect(() => { 
+  useEffect(() => {
     if (getAccessToken()) {
-      getCurrentUser()
+      getCurrentUser();
     } else {
-      setIsAuthLoaded(true)
+      setIsAuthLoaded(true);
     }
-  }, [getCurrentUser])
+  }, [getCurrentUser]);
 
   const value = useMemo(() => {
     return {
-      currentUser, 
-      isAuthLoaded, 
-      login 
-    }
-  }, [currentUser, isAuthLoaded, login])
+      currentUser,
+      isAuthLoaded,
+      login,
+    };
+  }, [currentUser, isAuthLoaded, login]);
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  )
-}
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};

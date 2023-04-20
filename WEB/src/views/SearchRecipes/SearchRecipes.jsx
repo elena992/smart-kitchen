@@ -2,12 +2,15 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { searchRecipes } from "../../services/RecipeService";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
-import "./SearchRecipes.css"
+import { createRecipe } from "../../services/RecipeService";
+
+import "./SearchRecipes.css";
 
 function SearchRecipes() {
   const [ingredients, setIngredients] = useState("");
   const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState(null);
+  const [savedRecipes, setSavedRecipes] = useState([]);
 
   const handleInputChange = (event) => {
     setIngredients(event.target.value);
@@ -21,7 +24,7 @@ function SearchRecipes() {
       searchRecipes(ingredients)
         .then((data) => {
           let json = JSON.parse(data.result);
-
+          console.log(json);
           if (data && data.result) {
             setRecipe(json);
             setIngredients("");
@@ -36,34 +39,46 @@ function SearchRecipes() {
     }
   };
 
-   const handleSave = () => {
-      setSavedRecipes(savedRecipes => [...savedRecipes, recipe]);
-    };
+  const handleSave = () => {
+    setSavedRecipes((savedRecipes) => [...savedRecipes, recipe]);
 
-    return (
-      <div className="">
-        <form onSubmit={handleSubmit}>
-          <label>
-            Type your ingredients to get your recipe
-            <input type="text" value={ingredients} onChange={handleInputChange} />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-        {error && <p className="error">{error}</p>}
-  
-        {recipe && (
-          <div className="">
-            <RecipeCard recipe={recipe}>
-              <div className="d-flex justify-content-between">
-                <button className="save-button" onClick={handleSave}>
-                  Save
-                </button>
-              </div>
-            </RecipeCard>
-          </div>
-        )}
-      </div>
-    );
-  }
-  
-  export default SearchRecipes;
+    createRecipe(recipe)
+      .then((response) => {
+       
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  return (
+    <div className="">
+      <form onSubmit={handleSubmit}>
+        <label>
+          Type your ingredients to get your recipe
+          <input type="text" value={ingredients} onChange={handleInputChange} />
+        </label>
+        <button type="submit">Search</button>
+      </form>
+      {error && <p className="error">{error}</p>}
+
+      {recipe && (
+        <div className="">
+          <RecipeCard recipe={recipe}>
+            <div className="d-flex justify-content-between">
+              <button
+                className="btn btn-primary"
+                onClick={handleSave}
+                disabled={!recipe}
+              >
+                Save
+              </button>
+            </div>
+          </RecipeCard>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default SearchRecipes;
