@@ -52,7 +52,7 @@ function SearchRecipes() {
         {error && <p className="error">{error}</p>}
   
         {recipe && (
-          <div>
+          <div className="">
             <RecipeCard recipe={recipe}>
               <div className="d-flex justify-content-between">
                 <button className="save-button" onClick={handleSave}>

@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from "../../contexts/AuthContext";
+import { logout } from "../../stores/AccessTokenStore"
 import './Navbar.css'
 
 const Navbar = () => {
+  const { currentUser } = useContext(AuthContext);
     const [menuOpen, setMenuOpen] = useState(false);
   
     const handleMenuOpen = () => {
       setMenuOpen(!menuOpen);
     };
-  
+
+    
     return (
       <nav className="navbar">
         <div className="navbar-brand">
@@ -26,6 +30,7 @@ const Navbar = () => {
             <Link to="/profile" className="navbar-item">Profile</Link>
             <Link to="/recipes" className="navbar-item">Create a Recipe</Link>
             <Link to="/recipes/search" className="navbar-item">Search Recipes</Link>
+            <button onClick={logout}>Logout</button>
           </div>
         </div>
       </nav>
