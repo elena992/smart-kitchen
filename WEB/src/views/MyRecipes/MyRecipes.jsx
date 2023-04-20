@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getRecipesByUser } from "../../services/RecipeService";
+import SimpleCard from "../../components/SimpleCard/SimpleCard";
 
 const MyRecipes = () => {
-  const [recipes, setRecipes] = useState([]);
+  const [recipe, setRecipes] = useState([]);
 
   useEffect(() => {
     getRecipesByUser()
@@ -16,12 +17,21 @@ const MyRecipes = () => {
 
   return (
     <div>
-      <h2>My Recipes</h2>
-      <ul>
-        {recipes.map((recipe) => (
-          <li key={recipe.id}>{recipe.name}</li>
-        ))}
-      </ul>
+      {recipe && (
+        <div className="">
+          <SimpleCard recipe={recipe}>
+            <div className="d-flex justify-content-between">
+              <button
+                className="btn btn-primary"
+                onClick={handleSave}
+                disabled={!recipe}
+              >
+                Save
+              </button>
+            </div>
+          </SimpleCard>
+        </div>
+      )}
     </div>
   );
 };
