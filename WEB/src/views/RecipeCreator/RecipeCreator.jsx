@@ -34,14 +34,14 @@ const RecipeCreator = () => {
     validateOnChange: false,
     validationSchema: recipeSchema,
     onSubmit: (values) => {
-      const formData = new FormData();
-
-      formData.append("name", values.name);
-      formData.append("ingredients", values.ingredients);
-      formData.append("instructions", values.instructions);
-      formData.append("photo", values.photo);
-      console.log(formData);
-      createRecipe(formData)
+      const recipe = {
+        name: values.name,
+        servings: values.servings,
+        ingredients: values.ingredients,
+        instructions: values.instructions,
+        notes: values.notes,
+      };
+      createRecipe(recipe)
         .then((response) => {
           resetForm();
         })
@@ -122,7 +122,7 @@ const RecipeCreator = () => {
           text="Notes"
           error={touched.notes && errors.notes}
           htmlFor="notes"
-          >
+        >
           <Input
             id="notes"
             name="notes"
