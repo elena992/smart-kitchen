@@ -30,7 +30,7 @@ const Navbar = () => {
             <Link to="/profile" className="navbar-item">Profile</Link>
             <Link to="/recipes" className="navbar-item">Create a Recipe</Link>
             <Link to="/recipes/search" className="navbar-item">Search Recipes</Link>
-            <Link to="/myrecipes" className="navbar-item">My Recipes</Link>
+            <Link to="/my-recipes" className="navbar-item">My Recipes</Link>
             <button onClick={logout}>Logout</button>
           </div>
         </div>
