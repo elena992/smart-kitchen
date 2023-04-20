@@ -37,8 +37,8 @@ const RecipeCreator = () => {
       const recipe = {
         name: values.name,
         servings: values.servings,
-        ingredients: values.ingredients,
-        instructions: values.instructions,
+        ingredients: values.ingredients.split(" "),
+        instructions: values.instructions.split("\n"),
         notes: values.notes,
       };
       createRecipe(recipe)

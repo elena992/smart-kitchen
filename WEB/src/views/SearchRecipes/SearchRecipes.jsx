@@ -2,7 +2,9 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { searchRecipes } from "../../services/RecipeService";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
-import "./SearchRecipes.css"
+import { createRecipe } from "../../services/RecipeService";
+
+import "./SearchRecipes.css";
 
 function SearchRecipes() {
   const [ingredients, setIngredients] = useState("");
@@ -22,7 +24,7 @@ function SearchRecipes() {
       searchRecipes(ingredients)
         .then((data) => {
           let json = JSON.parse(data.result);
-
+          console.log(json);
           if (data && data.result) {
             setRecipe(json);
             setIngredients("");
@@ -38,38 +40,45 @@ function SearchRecipes() {
   };
 
   const handleSave = () => {
-    setSavedRecipes(savedRecipes => [...savedRecipes, <RecipeCard recipe={recipe} />]);
-    console.log('Recipe saved:', recipe);
+    setSavedRecipes((savedRecipes) => [...savedRecipes, recipe]);
+
+    createRecipe(recipe)
+      .then((response) => {
+       
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-    return (
-      <div className="">
-        <form onSubmit={handleSubmit}>
-          <label>
-            Type your ingredients to get your recipe
-            <input type="text" value={ingredients} onChange={handleInputChange} />
-          </label>
-          <button type="submit">Search</button>
-        </form>
-        {error && <p className="error">{error}</p>}
-  
-        {recipe && (
-          <div className="">
-            <RecipeCard recipe={recipe}>
-              <div className="d-flex justify-content-between">
+  return (
+    <div className="">
+      <form onSubmit={handleSubmit}>
+        <label>
+          Type your ingredients to get your recipe
+          <input type="text" value={ingredients} onChange={handleInputChange} />
+        </label>
+        <button type="submit">Search</button>
+      </form>
+      {error && <p className="error">{error}</p>}
+
+      {recipe && (
+        <div className="">
+          <RecipeCard recipe={recipe}>
+            <div className="d-flex justify-content-between">
               <button
-              className="btn btn-primary"
+                className="btn btn-primary"
                 onClick={handleSave}
                 disabled={!recipe}
-                >
+              >
                 Save
               </button>
             </div>
           </RecipeCard>
         </div>
-        )}
-      </div>
-    );
-  }
-  
-  export default SearchRecipes;
+      )}
+    </div>
+  );
+}
+
+export default SearchRecipes;
