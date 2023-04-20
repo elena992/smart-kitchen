@@ -2,8 +2,7 @@ const router = require("express").Router();
 const authController = require("../controllers/auth.controller");
 const usersController = require("../controllers/user.controller");
 const recipesController = require("../controllers/recipes.controller");
-const upload = require('./storage.config');
-
+const upload = require("./storage.config");
 
 const authMiddleware = require("../middlewares/auth.middleware");
 
@@ -14,17 +13,34 @@ const authMiddleware = require("../middlewares/auth.middleware");
 router.post("/login", authController.login);
 
 /* Users */
-router.post('/signup', usersController.create);
-router.get('/users', usersController.list);
-router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser);
-router.get('/users/:id', usersController.getUser);
+router.post("/signup", usersController.create);
+router.get("/users", usersController.list);
+router.get(
+  "/users/me",
+  authMiddleware.isAuthenticated,
+  usersController.getCurrentUser
+);
+router.get("/users/:id", usersController.getUser);
 //router.get('/users/:id/edit', authMiddleware.isAuthenticated, usersController.editUser);
 
 /* Recipes */
 
-router.post('/recipes', authMiddleware.isAuthenticated, upload.single('photo'), recipesController.create);
-router.get('/recipes', recipesController.list);
-router.get('/recipes/:id', authMiddleware.isAuthenticated, recipesController.getRecipesByUser);
-router.post('/recipes/search', authMiddleware.isAuthenticated, recipesController.searchRecipes)
+router.post(
+  "/create-recipe",
+  authMiddleware.isAuthenticated,
+  upload.single("photo"),
+  recipesController.create
+);
+router.get("/recipes", recipesController.list);
+router.get(
+  "/my-recipes",
+  authMiddleware.isAuthenticated,
+  recipesController.getRecipesByCurrentUser
+);
+router.post(
+  "/recipes/search",
+  authMiddleware.isAuthenticated,
+  recipesController.searchRecipes
+);
 
 module.exports = router;

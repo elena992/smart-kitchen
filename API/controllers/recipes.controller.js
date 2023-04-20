@@ -27,10 +27,10 @@ module.exports.list = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.getRecipesByUser = (req, res, next) => {
-  const { id } = req.params;
-  console.log("id", id);
-  Recipe.findByIdAndUpdate(id, { createdBy: req.currentUserId }, { new: true })
+module.exports.getRecipesByCurrentUser = (req, res, next) => {
+  const userId = req.currentUserId;
+
+  Recipe.find({ owner: userId })
     .then((recipe) => res.json(recipe))
     .catch(next);
 };

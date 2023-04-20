@@ -5,12 +5,12 @@ const authenticatedHttp = createHttp(true);
 const unauthenticatedHttp = createHttp(false);
 
 export const createRecipe = (recipe) =>
-  authenticatedHttp.post("/recipes", recipe);
+  authenticatedHttp.post("/create-recipe", recipe);
 
 export const listRecipes = () => unauthenticatedHttp.get("/recipes");
 
-export const getRecipesByUser = (id) =>
-  authenticatedHttp.patch(`/recipes/${id}`);
+export const getRecipesByCurrentUser = () =>
+  authenticatedHttp.get(`/my-recipes`);
 
 export const searchRecipes = (ingredients) =>
   authenticatedHttp.post("/recipes/search", { ingredients });
