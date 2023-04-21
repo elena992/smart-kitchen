@@ -33,6 +33,21 @@ module.exports.getRecipesByCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
+module.exports.getRecipeById = (req, res, next) => {
+  const recipeId = req.params.id;
+
+  Recipe.findById(recipeId)
+    .then((recipe) => {
+      if (!recipe) {
+        return res.status(404).send('Recipe not found');
+      }
+
+      res.json(recipe);
+    })
+    .catch(next);
+};
+
+
 module.exports.searchRecipes = (req, res, next) => {
   const { ingredients } = req.body;
   const prompt = `Give me some recipe ideas using the following ingredients: ${ingredients} in this {"name":"","servings":0,"ingredients":[""],"instructions":[""],"notes":""} json format.`;

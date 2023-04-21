@@ -14,3 +14,8 @@ export const getRecipesByCurrentUser = () =>
 
 export const searchRecipes = (ingredients) =>
   authenticatedHttp.post("/recipes/search", { ingredients });
+
+
+export const getRecipeById = (id) =>
+authenticatedHttp.get(`/detail-recipe/${id}`);
+

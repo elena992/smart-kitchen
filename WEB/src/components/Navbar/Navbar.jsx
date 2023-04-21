@@ -47,6 +47,9 @@ const Navbar = () => {
           <Link to="/my-recipes" className="navbar-item">
             My Recipes
           </Link>
+          <Link to="/detail-recipe/:id" className="navbar-item">
+            Detail Recipe
+          </Link>
           <button onClick={logout}>Logout</button>
         </div>
       </div>
