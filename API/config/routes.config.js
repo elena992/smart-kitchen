@@ -50,4 +50,10 @@ router.post(
   recipesController.searchRecipes
 );
 
+router.post(
+  "/recipes/search-image",
+  authMiddleware.isAuthenticated,
+  recipesController.getImageFromPrompt
+);
+
 module.exports = router;

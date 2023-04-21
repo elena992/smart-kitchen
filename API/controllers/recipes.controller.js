@@ -39,14 +39,13 @@ module.exports.getRecipeById = (req, res, next) => {
   Recipe.findById(recipeId)
     .then((recipe) => {
       if (!recipe) {
-        return res.status(404).send('Recipe not found');
+        return res.status(404).send("Recipe not found");
       }
 
       res.json(recipe);
     })
     .catch(next);
 };
-
 
 module.exports.searchRecipes = (req, res, next) => {
   const { ingredients } = req.body;
@@ -67,6 +66,30 @@ module.exports.searchRecipes = (req, res, next) => {
     .then((response) => {
       const result = response.data.choices[0].text;
       res.json({ result });
+    })
+    .catch((error) => {
+      next(error);
+    });
+};
+
+module.exports.getImageFromPrompt = (req, res, next) => {
+  const { prompt } = req.body;
+  const data = {
+    prompt: prompt,
+    n: 1,
+    size: "512x512",
+  };
+
+  axios
+    .post("https://api.openai.com/v1/images/generations", data, {
+      headers: {
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
+    })
+    .then((response) => {
+      console.log(response.data);
+      let image = response.data.data[0].url;
+      res.json({ image });
     })
     .catch((error) => {
       next(error);
