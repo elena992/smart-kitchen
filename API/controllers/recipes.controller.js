@@ -1,10 +1,17 @@
 const Recipe = require("../models/Recipe.model");
 const axios = require("axios");
+const uploadSingleImage = require("../config/storage.config");
 
 module.exports.create = (req, res, next) => {
   if (req.file) {
+    // manually saved
     req.body.photo = req.file.path;
   }
+  // saved from open ai
+  else {
+    uploadSingleImage(req.body.photo);
+  }
+
   const { name, servings, ingredients, instructions, photo, notes } = req.body;
   Recipe.create({
     name,
