@@ -2,13 +2,14 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { searchRecipes } from "../../services/RecipeService";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
-import { createRecipe } from "../../services/RecipeService";
+import { createRecipe, getImageFromPrompt } from "../../services/RecipeService";
 
 import "./SearchRecipes.css";
 
 function SearchRecipes() {
   const [ingredients, setIngredients] = useState("");
   const [recipe, setRecipe] = useState(null);
+  const [photo, setRecipeImage] = useState(null);
   const [error, setError] = useState(null);
   const [savedRecipes, setSavedRecipes] = useState([]);
 
@@ -24,10 +25,22 @@ function SearchRecipes() {
       searchRecipes(ingredients)
         .then((data) => {
           let json = JSON.parse(data.result);
-          console.log(json);
           if (data && data.result) {
             setRecipe(json);
             setIngredients("");
+            getImageFromPrompt(json.name)
+              .then((data) => {
+                console.log(data.image);
+                setRecipe((prevRecipe) => {
+                  return {
+                    ...prevRecipe,
+                    photo: data.image,
+                  };
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           } else {
             setError("Invalid response from API");
           }
@@ -43,9 +56,7 @@ function SearchRecipes() {
     setSavedRecipes((savedRecipes) => [...savedRecipes, recipe]);
 
     createRecipe(recipe)
-      .then((response) => {
-       
-      })
+      .then((response) => {})
       .catch((err) => {
         console.log(err);
       });
