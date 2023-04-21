@@ -1,7 +1,7 @@
 import React from "react";
 
 const SimpleCard = ({ recipe, children }) => {
-  console.log(recipe.photo);
+  //console.log(recipe.photo);
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img

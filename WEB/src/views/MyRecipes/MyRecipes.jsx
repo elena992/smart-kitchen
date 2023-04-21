@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getRecipesByCurrentUser } from "../../services/RecipeService";
 import SimpleCard from "../../components/SimpleCard/SimpleCard";
+import { useNavigate } from "react-router-dom";
 
 const MyRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getRecipesByCurrentUser()
@@ -27,7 +29,7 @@ const MyRecipes = () => {
           <div key={recipe._id} className="">
             <SimpleCard recipe={recipe}>
               <div className="d-flex justify-content-between">
-                <button className="btn btn-primary">Detail</button>
+              <button onClick={() => navigate(`/detail-recipe/${recipe._id}`)} className="btn btn-primary">Detail</button>
               </div>
             </SimpleCard>
           </div>

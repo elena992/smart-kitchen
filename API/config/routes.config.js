@@ -37,6 +37,13 @@ router.get(
   authMiddleware.isAuthenticated,
   recipesController.getRecipesByCurrentUser
 );
+
+router.get(
+  "/detail-recipe/:id",
+  authMiddleware.isAuthenticated,
+  recipesController.getRecipeById
+);
+
 router.post(
   "/recipes/search",
   authMiddleware.isAuthenticated,
