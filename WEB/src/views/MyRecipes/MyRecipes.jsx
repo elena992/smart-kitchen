@@ -22,7 +22,7 @@ const MyRecipes = () => {
   }, []);
 
   return (
-    <div className="container my-3 recipes">
+    <div className="row container my-3 recipes">
       {isLoading ? (
         <p>Loading...</p>
       ) : recipes && recipes.length > 0 ? (
