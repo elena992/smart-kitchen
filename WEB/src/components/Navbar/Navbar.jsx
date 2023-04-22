@@ -28,30 +28,55 @@ const Navbar = () => {
         </div>
       </div>
       <div className={`navbar-menu ${menuOpen ? "is-active" : ""}`}>
-        <div className="navbar-end">
-          <Link to="/login" className="navbar-item">
-            Log in
-          </Link>
-          <Link to="/signup" className="navbar-item">
-            Sign up
-          </Link>
-          <Link to="/profile" className="navbar-item">
-            Profile
-          </Link>
-          <Link to="/create-recipe" className="navbar-item">
-            Create a Recipe
-          </Link>
-          <Link to="/recipes/search" className="navbar-item">
-            Search Recipes
-          </Link>
-          <Link to="/my-recipes" className="navbar-item">
-            My Recipes
-          </Link>
-          <Link to="/detail-recipe/:id" className="navbar-item">
-            Detail Recipe
-          </Link>
-          <button onClick={logout}>Logout</button>
-        </div>
+        {!currentUser ? (
+          <div className="navbar-end">
+            <Link to="/login" className="navbar-item" onClick={handleMenuOpen}>
+              Log in
+            </Link>
+            <Link to="/signup" className="navbar-item" onClick={handleMenuOpen}>
+              Sign up
+            </Link>
+          </div>
+        ) : (
+          <div className="navbar-end">
+            <Link
+              to="/profile"
+              className="navbar-item"
+              onClick={handleMenuOpen}
+            >
+              Profile
+            </Link>
+            <Link
+              to="/create-recipe"
+              className="navbar-item"
+              onClick={handleMenuOpen}
+            >
+              Create a Recipe
+            </Link>
+            <Link
+              to="/recipes/search"
+              className="navbar-item"
+              onClick={handleMenuOpen}
+            >
+              Search Recipes
+            </Link>
+            <Link
+              to="/my-recipes"
+              className="navbar-item"
+              onClick={handleMenuOpen}
+            >
+              My Recipes
+            </Link>
+            <Link
+              to="/detail-recipe/:id"
+              className="navbar-item"
+              onClick={handleMenuOpen}
+            >
+              Detail Recipe
+            </Link>
+            <button onClick={logout}>Logout</button>
+          </div>
+        )}
       </div>
     </nav>
   );
