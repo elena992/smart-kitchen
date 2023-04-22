@@ -56,4 +56,8 @@ router.post(
   recipesController.getImageFromPrompt
 );
 
+router.delete('/recipes/delete/:id', authMiddleware.isAuthenticated, recipesController.deleteRecipes)
+
+/*router.patch("/recipes/:id", authMiddleware.isAuthenticated, upload.single("photo"), recipesController.updateRecipe); */
+
 module.exports = router;

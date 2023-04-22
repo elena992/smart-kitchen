@@ -1,6 +1,6 @@
 import React from "react";
 
-const RecipeCard = ({ recipe, onEdit, onDelete, children }) => {
+const RecipeCard = ({ recipe, children }) => {
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img
