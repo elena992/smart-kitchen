@@ -1,5 +1,5 @@
 import React from "react";
-import "./RecipeCard.css"
+import "./RecipeCard.css";
 
 const RecipeCard = ({ recipe, children }) => {
   return (
@@ -10,9 +10,8 @@ const RecipeCard = ({ recipe, children }) => {
         alt={recipe.name}
       />
       <div className="card-recipe-body">
-        <h5 className="card-recipe-title">
-          {recipe.name} - {recipe.servings} servings
-        </h5>
+        <h5 className="card-recipe-headline">{recipe.name}</h5>
+        <p className="card-recipe-text">{recipe.servings} servings</p>
         <p className="card-recipe-text">{recipe.ingredients}</p>
         <p className="card-recipe-text">{recipe.instructions}</p>
         <p className="card-recipe-text">{recipe.notes}</p>
@@ -23,6 +22,3 @@ const RecipeCard = ({ recipe, children }) => {
 };
 
 export default RecipeCard;
-
-
-
