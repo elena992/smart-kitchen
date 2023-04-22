@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getRecipeById, updateRecipe, deleteRecipes} from "../../services/RecipeService.js";
+import { getRecipeById, deleteRecipes} from "../../services/RecipeService.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import { useParams } from "react-router-dom";
 
