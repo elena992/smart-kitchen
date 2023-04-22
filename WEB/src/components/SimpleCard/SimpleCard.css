@@ -5,6 +5,8 @@
   overflow: hidden;
   position: relative;
   margin-right: 10%;
+  margin-left: 10%;
+  margin-bottom: 5%;
 }
 
 .card-simple img {
