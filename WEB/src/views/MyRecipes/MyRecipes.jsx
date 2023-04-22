@@ -21,15 +21,24 @@ const MyRecipes = () => {
   }, []);
 
   return (
-    <div className="row">
+    <div className="row container my-3 ">
       {isLoading ? (
         <p>Loading...</p>
       ) : recipes && recipes.length > 0 ? (
         recipes.map((recipe) => (
-          <div key={recipe._id} className="col-lg-4 col-md-6 col-sm-12 mb-3" style={{ marginBottom: "1rem" }}>
+          <div
+            key={recipe._id}
+            className="col-lg-4 col-md-6 col-sm-12 mb-3"
+            style={{ marginBottom: "1rem" }}
+          >
             <SimpleCard recipe={recipe}>
               <div className="d-flex justify-content-between">
-                <button onClick={() => navigate(`/detail-recipe/${recipe._id}`)} className="btn btn-primary">Detail</button>
+                <button
+                  onClick={() => navigate(`/detail-recipe/${recipe._id}`)}
+                  className="btn btn-primary"
+                >
+                  Detail
+                </button>
               </div>
             </SimpleCard>
           </div>

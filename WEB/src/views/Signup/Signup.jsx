@@ -7,6 +7,7 @@ import { signup as signupService } from "../../services/AuthService";
 import { setAccessToken } from "../../stores/AccessTokenStore";
 import { signupSchema } from "../../schemas/signup.schema";
 import { useNavigate } from "react-router-dom";
+import "./Signup.css";
 
 const initialValues = {
   firstName: "",
@@ -15,8 +16,6 @@ const initialValues = {
   email: "",
   password: "",
 };
-
-
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -39,7 +38,7 @@ const Signup = () => {
     onSubmit: (values) => {
       signupService(values)
         .then((response) => {
-          navigate('/login');
+          navigate("/login");
         })
         .catch((err) => {
           if (err?.response?.data?.message) {
@@ -53,99 +52,100 @@ const Signup = () => {
   });
 
   return (
-    <div>
-      <h1>Sign up</h1>
-
-      <form onSubmit={handleSubmit}>
-        <FormControl
-          text="Email"
-          error={touched.email && errors.email}
-          htmlFor="email"
-        >
-          <Input
-            id="email"
-            name="email"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
+    <div className="container my-3">
+      <div>
+        <h1>Sign up</h1>
+        <form onSubmit={handleSubmit}>
+          <FormControl
+            text="Email"
             error={touched.email && errors.email}
-            placeholder="Enter your email..."
-          />
-        </FormControl>
+            htmlFor="email"
+          >
+            <Input
+              id="email"
+              name="email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+              error={touched.email && errors.email}
+              placeholder="Enter your email..."
+            />
+          </FormControl>
 
-        <FormControl
-          text="Password"
-          error={touched.password && errors.password}
-          htmlFor="password"
-        >
-          <Input
-            id="password"
-            name="password"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
+          <FormControl
+            text="Password"
             error={touched.password && errors.password}
-            placeholder="Enter your password..."
-            type="password"
-          />
-        </FormControl>
-        <FormControl
-          text="First Name"
-          error={touched.firstName && errors.firstName}
-          htmlFor="firstName"
-        >
-          <Input
-            id="firstName"
-            name="firstName"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.firstName}
+            htmlFor="password"
+          >
+            <Input
+              id="password"
+              name="password"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.password}
+              error={touched.password && errors.password}
+              placeholder="Enter your password..."
+              type="password"
+            />
+          </FormControl>
+          <FormControl
+            text="First Name"
             error={touched.firstName && errors.firstName}
-            placeholder="Enter your First Name..."
-            type="firstName"
-          />
-        </FormControl>
-        <FormControl
-          text="Last Name"
-          error={touched.lastName && errors.lastName}
-          htmlFor="lastName"
-        >
-          <Input
-            id="lastName"
-            name="lastName"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.lastName}
+            htmlFor="firstName"
+          >
+            <Input
+              id="firstName"
+              name="firstName"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.firstName}
+              error={touched.firstName && errors.firstName}
+              placeholder="Enter your First Name..."
+              type="firstName"
+            />
+          </FormControl>
+          <FormControl
+            text="Last Name"
             error={touched.lastName && errors.lastName}
-            placeholder="Enter your Last Name..."
-            type="lastName"
-          />
-        </FormControl>
-        <FormControl
-          text="Restaurant Name"
-          error={touched.restaurantName && errors.restaurantName}
-          htmlFor="restaurantName"
-        >
-          <Input
-            id="restaurantName"
-            name="restaurantName"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.restaurantName}
+            htmlFor="lastName"
+          >
+            <Input
+              id="lastName"
+              name="lastName"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.lastName}
+              error={touched.lastName && errors.lastName}
+              placeholder="Enter your Last Name..."
+              type="lastName"
+            />
+          </FormControl>
+          <FormControl
+            text="Restaurant Name"
             error={touched.restaurantName && errors.restaurantName}
-            placeholder="Enter your Restaurant's Name..."
-            type="restaurantName"
-          />
-        </FormControl>
+            htmlFor="restaurantName"
+          >
+            <Input
+              id="restaurantName"
+              name="restaurantName"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.restaurantName}
+              error={touched.restaurantName && errors.restaurantName}
+              placeholder="Enter your Restaurant's Name..."
+              type="restaurantName"
+            />
+          </FormControl>
 
-        <button
-          className="btn btn-primary"
-          type="submit"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Loading..." : "Sign up"}
-        </button>
-      </form>
+          <button
+            className="btn btn-primary"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Loading..." : "Sign up"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
