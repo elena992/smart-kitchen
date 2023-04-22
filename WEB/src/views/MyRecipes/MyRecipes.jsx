@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getRecipesByCurrentUser } from "../../services/RecipeService";
 import SimpleCard from "../../components/SimpleCard/SimpleCard";
 import { useNavigate } from "react-router-dom";
+import "./MyRecipes.css";
 
 const MyRecipes = () => {
   const [recipes, setRecipes] = useState([]);
@@ -21,7 +22,7 @@ const MyRecipes = () => {
   }, []);
 
   return (
-    <div className="row container my-3 ">
+    <div className="row container my-3 recipes">
       {isLoading ? (
         <p>Loading...</p>
       ) : recipes && recipes.length > 0 ? (
@@ -31,16 +32,10 @@ const MyRecipes = () => {
             className="col-lg-4 col-md-6 col-sm-12 mb-3"
             style={{ marginBottom: "1rem" }}
           >
-            <SimpleCard recipe={recipe}>
-              <div className="d-flex justify-content-between">
-                <button
-                  onClick={() => navigate(`/detail-recipe/${recipe._id}`)}
-                  className="btn btn-primary"
-                >
-                  Detail
-                </button>
-              </div>
-            </SimpleCard>
+            <SimpleCard
+              recipe={recipe}
+              linkTo={`/detail-recipe/${recipe._id}`}
+            ></SimpleCard>
           </div>
         ))
       ) : (
