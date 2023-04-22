@@ -21,14 +21,16 @@ const SimpleCard = ({ recipe, children }) => {
 const SimpleCard = ({ recipe, children }) => {
   return (
     <div className="card-simple">
-      <img
-        className="card-simple-img-top"
-        src={recipe.photo}
-        alt={recipe.name}
-      />
-      <div className="card-simple-name">{recipe.name}</div>
-      {children}
-    </div>
+    <img
+      className="card-simple-img-top"
+      src={recipe.photo}
+      alt={recipe.name}
+    />
+    <div className="card-simple-name">{recipe.name}</div>
+    {children}
+  </div>
   );
 };
 export default SimpleCard;
+
+
