@@ -4,6 +4,7 @@
   height: 300px;
   overflow: hidden;
   position: relative;
+  margin-right: 10%;
 }
 
 .card-simple img {
