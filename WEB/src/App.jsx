@@ -1,8 +1,6 @@
-import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import AuthContext, { AuthProvider } from "./contexts/AuthContext";
 import Login from "./views/Login/Login";
 import Profile from "./views/Profile/Profile";
 import RecipeCreator from "./views/RecipeCreator/RecipeCreator";
@@ -10,6 +8,7 @@ import SearchRecipes from "./views/SearchRecipes/SearchRecipes";
 import Signup from "./views/Signup/Signup";
 import MyRecipes from "./views/MyRecipes/MyRecipes";
 import DetailRecipe from "./views/DetailRecipe/DetailRecipe";
+import Landing from "./views/Landing/Landing";
 
 function App() {
   return (
@@ -18,6 +17,7 @@ function App() {
 
       <div className="container my-3">
         <Routes>
+          <Route path="/" element={<Landing />} />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
           <Route
