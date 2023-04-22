@@ -52,7 +52,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-            <Route
+          <Route
             path="detail-recipe/:id"
             element={
               <ProtectedRoute>

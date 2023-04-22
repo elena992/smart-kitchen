@@ -95,3 +95,40 @@ module.exports.getImageFromPrompt = (req, res, next) => {
       next(error);
     });
 };
+
+/*
+module.exports.updateRecipe = (req, res, next) => {
+  const recipeId = req.params.id;
+  const { name, servings, ingredients, instructions, photo, notes } = req.body;
+  Recipe.findById(recipeId)
+    .then((recipe) => {
+      if (!recipe) {
+        return res.status(404).send("Recipe not found");
+      }
+      if (req.file) {
+        req.body.photo = req.file.path;
+      }
+      const updatedRecipe = {
+        name,
+        servings,
+        ingredients,
+        instructions,
+        photo: req.body.photo || recipe.photo,
+        notes,
+      };
+      Recipe.findByIdAndUpdate(recipeId, updatedRecipe, { new: true })
+        .then((recipe) => res.json(recipe))
+        .catch(next);
+    })
+    .catch(next);
+};
+*/
+
+module.exports.deleteRecipes = (req, res, next) => {
+  const { id } = req.params;
+  console.log("delete", id);
+  Recipe.findByIdAndDelete(id)
+    .then((recipe) => res.status(204).json(recipe))
+
+    .catch(next);
+};
