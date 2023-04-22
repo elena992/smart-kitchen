@@ -7,6 +7,7 @@ import { signup as signupService } from "../../services/AuthService";
 import { setAccessToken } from "../../stores/AccessTokenStore";
 import { signupSchema } from "../../schemas/signup.schema";
 import { useNavigate } from "react-router-dom";
+import './Signup.css';
 
 const initialValues = {
   firstName: "",
@@ -15,8 +16,6 @@ const initialValues = {
   email: "",
   password: "",
 };
-
-
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -39,7 +38,7 @@ const Signup = () => {
     onSubmit: (values) => {
       signupService(values)
         .then((response) => {
-          navigate('/login');
+          navigate("/login");
         })
         .catch((err) => {
           if (err?.response?.data?.message) {
@@ -53,7 +52,7 @@ const Signup = () => {
   });
 
   return (
-    <div>
+    <div className="signup-page">
       <h1>Sign up</h1>
 
       <form onSubmit={handleSubmit}>
