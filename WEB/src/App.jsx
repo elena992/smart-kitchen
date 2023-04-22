@@ -14,53 +14,51 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div className="container my-3">
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="login" element={<Login />} />
-          <Route
-            path="profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="create-recipe"
-            element={
-              <ProtectedRoute>
-                <RecipeCreator />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="recipes/search"
-            element={
-              <ProtectedRoute>
-                <SearchRecipes />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="my-recipes"
-            element={
-              <ProtectedRoute>
-                <MyRecipes />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="detail-recipe/:id"
-            element={
-              <ProtectedRoute>
-                <DetailRecipe />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="signup" element={<Signup />} />
+        <Route path="login" element={<Login />} />
+        <Route
+          path="profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="create-recipe"
+          element={
+            <ProtectedRoute>
+              <RecipeCreator />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="recipes/search"
+          element={
+            <ProtectedRoute>
+              <SearchRecipes />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="my-recipes"
+          element={
+            <ProtectedRoute>
+              <MyRecipes />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="detail-recipe/:id"
+          element={
+            <ProtectedRoute>
+              <DetailRecipe />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </div>
   );
 }

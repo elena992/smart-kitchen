@@ -63,7 +63,7 @@ function SearchRecipes() {
   };
 
   return (
-    <div className="">
+    <div className="container my-3">
       <form onSubmit={handleSubmit}>
         <label>
           Type your ingredients to get your recipe

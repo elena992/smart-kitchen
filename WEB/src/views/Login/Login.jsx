@@ -47,51 +47,53 @@ const Login = () => {
   });
 
   return (
-    <div className="container">
-      <h1>Login</h1>
+    <div className="container my-3">
+      <div>
+        <h1>Login</h1>
 
-      <form onSubmit={handleSubmit}>
-        <FormControl
-          text="Email"
-          error={touched.email && errors.email}
-          htmlFor="email"
-        >
-          <Input
-            id="email"
-            name="email"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
+        <form onSubmit={handleSubmit}>
+          <FormControl
+            text="Email"
             error={touched.email && errors.email}
-            placeholder="Enter your email..."
-          />
-        </FormControl>
+            htmlFor="email"
+          >
+            <Input
+              id="email"
+              name="email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+              error={touched.email && errors.email}
+              placeholder="Enter your email..."
+            />
+          </FormControl>
 
-        <FormControl
-          text="Password"
-          error={touched.password && errors.password}
-          htmlFor="password"
-        >
-          <Input
-            id="password"
-            name="password"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
+          <FormControl
+            text="Password"
             error={touched.password && errors.password}
-            placeholder="Enter your password..."
-            type="password"
-          />
-        </FormControl>
+            htmlFor="password"
+          >
+            <Input
+              id="password"
+              name="password"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.password}
+              error={touched.password && errors.password}
+              placeholder="Enter your password..."
+              type="password"
+            />
+          </FormControl>
 
-        <button
-          className="btn btn-primary"
-          type="submit"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Loading..." : "Log in"}
-        </button>
-      </form>
+          <button
+            className="btn btn-primary"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Loading..." : "Log in"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
