@@ -7,7 +7,7 @@ import { signup as signupService } from "../../services/AuthService";
 import { setAccessToken } from "../../stores/AccessTokenStore";
 import { signupSchema } from "../../schemas/signup.schema";
 import { useNavigate } from "react-router-dom";
-import './Signup.css';
+import "./Signup.css";
 
 const initialValues = {
   firstName: "",
@@ -52,7 +52,7 @@ const Signup = () => {
   });
 
   return (
-    <div className="signup-page">
+    <div className="container my-3">
       <h1>Sign up</h1>
 
       <form onSubmit={handleSubmit}>
