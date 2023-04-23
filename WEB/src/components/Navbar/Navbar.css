@@ -1,6 +1,5 @@
 .navbar {
-    background-color: purple;
-    color: white;
+    background-color: #76b5c5;
     display: flex;
     justify-content: space-between;
     padding: 1rem;
@@ -59,11 +58,15 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: purple;
+    background-color: #76b5c5;
     padding: 1rem;
     width: 100%;
   }
   
   .navbar-menu.is-active {
     display: block;
+  }
+
+  .logo-navbar{
+    height: 40px;
   }

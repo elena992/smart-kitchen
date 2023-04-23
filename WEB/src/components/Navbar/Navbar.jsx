@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext";
 import { logout } from "../../stores/AccessTokenStore";
 import "./Navbar.css";
+import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
@@ -16,7 +17,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-brand">
         <Link to="/" className="navbar-item">
-          Home
+          <img src={logo} alt="Logo" className="logo-navbar" />
         </Link>
         <div
           className={`navbar-burger ${menuOpen ? "is-active" : ""}`}
@@ -40,13 +41,6 @@ const Navbar = () => {
         ) : (
           <div className="navbar-end">
             <Link
-              to="/profile"
-              className="navbar-item"
-              onClick={handleMenuOpen}
-            >
-              Profile
-            </Link>
-            <Link
               to="/create-recipe"
               className="navbar-item"
               onClick={handleMenuOpen}
@@ -67,7 +61,16 @@ const Navbar = () => {
             >
               My Recipes
             </Link>
-            <button onClick={logout}>Logout</button>
+            <Link
+              to="/profile"
+              className="navbar-item"
+              onClick={handleMenuOpen}
+            >
+              Profile
+            </Link>
+            <button className="btn btn-secondary logout-btn" onClick={logout}>
+              Logout
+            </button>
           </div>
         )}
       </div>

@@ -2,6 +2,7 @@ import "./Landing.css";
 import AuthContext from "../../contexts/AuthContext";
 import { useContext } from "react";
 import { logout } from "../../stores/AccessTokenStore.js";
+import logo from "../../assets/images/logo.png";
 
 const Landing = () => {
   const { currentUser } = useContext(AuthContext);
@@ -18,7 +19,9 @@ const Landing = () => {
       <div className="landing-page-content">
         {!currentUser ? (
           <div>
-            <h1>Welcome to Smart Kitchen</h1>
+            <div>
+              <img src={logo} alt="Logo" className="logo" />
+            </div>
             <div className="wrapper">
               <button
                 className="btn btn-primary"
@@ -40,8 +43,11 @@ const Landing = () => {
           </div>
         ) : (
           <div>
-            <h1>Welcome {currentUser.firstName} to Smart Kitchen</h1>
-            <h3>What do you want to do today?</h3>
+            <div>
+              <img src={logo} alt="Logo" className="logo" />
+            </div>
+            <h2>Welcome {currentUser.firstName} </h2>
+            <h4>What do you want to do today?</h4>
             <div className="wrapper">
               <button
                 className="btn btn-primary"
