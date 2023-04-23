@@ -11,5 +11,11 @@
   
   .landing-page-content {
     text-align: center;
-    color: white;
+    color: black;
   }
+
+  .wrapper {
+    justify-content: center;
+
+    display: flex;
+    gap: 10px;  }
