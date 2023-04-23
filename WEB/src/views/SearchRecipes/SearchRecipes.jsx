@@ -29,6 +29,7 @@ function SearchRecipes() {
       searchRecipes(ingredients)
         .then((data) => {
           if (data && data.result) {
+            console.log(data.result);
             let json = JSON.parse(data.result);
             setRecipe(json);
             setIngredients("");
@@ -52,7 +53,6 @@ function SearchRecipes() {
           }
         })
         .catch((err) => {
-          console.log;
           console.log(err);
           setError("Error fetching data: " + error);
         });
@@ -60,6 +60,7 @@ function SearchRecipes() {
   };
 
   const handleSavePhoto = () => {
+    setIsLoadingRecipeImage(true);
     savePhoto(recipe.photo)
       .then((response) => {
         createRecipe({
@@ -74,8 +75,10 @@ function SearchRecipes() {
               position: toast.POSITION.BOTTOM_RIGHT,
             });
             setRecipe(null);
+            setIsLoadingRecipeImage(false);
           })
           .catch((err) => {
+            setIsLoadingRecipeImage(false);
             console.log(err);
           });
       })
