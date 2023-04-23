@@ -11,10 +11,24 @@ const RecipeCard = ({ recipe, children }) => {
       />
       <div className="card-recipe-body">
         <h5 className="card-recipe-headline">{recipe.name}</h5>
-        <p className="card-recipe-text">{recipe.servings} servings</p>
-        <p className="card-recipe-text">{recipe.ingredients}</p>
-        <p className="card-recipe-text">{recipe.instructions}</p>
-        <p className="card-recipe-text">{recipe.notes}</p>
+        <p className="card-recipe-text">{recipe.servings} portions</p>
+        <div>
+          <h4>Ingredients</h4>
+          <ul>
+            {recipe.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4>Steps</h4>
+          <ol>
+            {recipe.instructions.map((ingredien, index) => (
+              <li key={index}>{ingredien}</li>
+            ))}
+          </ol>
+        </div>
+        <p className="card-recipe-text">Notes: {recipe.notes}</p>
         {children}
       </div>
     </div>
