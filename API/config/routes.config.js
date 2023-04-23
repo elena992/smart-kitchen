@@ -2,6 +2,7 @@ const router = require("express").Router();
 const authController = require("../controllers/auth.controller");
 const usersController = require("../controllers/user.controller");
 const recipesController = require("../controllers/recipes.controller");
+const photoController = require("../controllers/photo.controller");
 const upload = require("./storage.config");
 
 const authMiddleware = require("../middlewares/auth.middleware");
@@ -56,7 +57,17 @@ router.post(
   recipesController.getImageFromPrompt
 );
 
-router.delete('/recipes/delete/:id', authMiddleware.isAuthenticated, recipesController.deleteRecipes)
+router.post(
+  "/recipes/save-image",
+  authMiddleware.isAuthenticated,
+  photoController.savePhoto
+);
+
+router.delete(
+  "/recipes/delete/:id",
+  authMiddleware.isAuthenticated,
+  recipesController.deleteRecipes
+);
 
 /*router.patch("/recipes/:id", authMiddleware.isAuthenticated, upload.single("photo"), recipesController.updateRecipe); */
 

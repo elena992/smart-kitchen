@@ -25,3 +25,6 @@ export const getImageFromPrompt = (prompt) =>
   authenticatedHttp.patch(`/detail-recipes/${id}`, recipe); */
 
   export const deleteRecipes = (id) => authenticatedHttp.delete(`/recipes/delete/${id}`);
+
+  export const saveImage = (photoUrl) =>
+  authenticatedHttp.post("/recipes/save-image", { photoUrl });
