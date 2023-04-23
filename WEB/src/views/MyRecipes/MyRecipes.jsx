@@ -27,7 +27,10 @@ const MyRecipes = () => {
         <p>Loading...</p>
       ) : recipes && recipes.length > 0 ? (
         recipes.map((recipe) => (
-          <div key={recipe._id} className="col-lg-4 col-md-6 col-sm-12 mb-3">
+          <div
+            key={recipe._id}
+            className="col-lg-3 col-md-4 col-sm-6 col-12 mb-3"
+          >
             <SimpleCard
               recipe={recipe}
               linkTo={`/detail-recipe/${recipe._id}`}
