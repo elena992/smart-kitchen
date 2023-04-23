@@ -9,3 +9,20 @@
   .loading{
     align-self: center
   }
+
+  .recipes-layout{
+    gap: 30px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: 100px;
+    margin-left: 20px;
+  }
+
+  @media (max-width: 767px) {
+    .recipes-layout {
+      flex-direction: column;
+      margin-top: 400px;
+    }
+  }
