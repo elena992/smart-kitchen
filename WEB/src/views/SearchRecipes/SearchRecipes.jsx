@@ -28,8 +28,9 @@ function SearchRecipes() {
       setIsLoadingRecipe(true);
       searchRecipes(ingredients)
         .then((data) => {
-          let json = JSON.parse(data.result);
           if (data && data.result) {
+            console.log(data.result);
+            let json = JSON.parse(data.result);
             setRecipe(json);
             setIngredients("");
             setIsLoadingRecipe(false);
