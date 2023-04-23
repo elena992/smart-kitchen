@@ -20,8 +20,6 @@ module.exports.create = (req, res, next) => {
     instructionsArray = instructions.split("\n");
   }
 
-  console.log(instructions);
-
   Recipe.create({
     name,
     servings,

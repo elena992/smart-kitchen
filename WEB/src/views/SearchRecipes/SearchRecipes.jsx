@@ -28,6 +28,7 @@ function SearchRecipes() {
       setIsLoadingRecipe(true);
       searchRecipes(ingredients)
         .then((data) => {
+          console.log(data);
           let json = JSON.parse(data.result);
           if (data && data.result) {
             setRecipe(json);
@@ -53,27 +54,27 @@ function SearchRecipes() {
           }
         })
         .catch((err) => {
+          console.log;
           console.log(err);
           setError("Error fetching data: " + error);
         });
     }
   };
 
-  const handleSaveImage = () => {
-    saveImage(
-      "https://oaidalleapiprodscus.blob.core.windows.net/private/org-ywYhsCJYdzU40YRHvCuA0Zkt/user-AVnaXDYnNvnHqV0M2KJPrZnI/img-56cdhIDuuiT6dHujW4ZwcpKm.png?st=2023-04-23T14%3A58%3A47Z&se=2023-04-23T16%3A58%3A47Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-04-23T15%3A58%3A47Z&ske=2023-04-24T15%3A58%3A47Z&sks=b&skv=2021-08-06&sig=wEGOiRNRnFqQ8CV7Cov9SBcAloVZzTmrKUGouZpygJA%3D"
-    )
+  const handleSaveRecipe = () => {
+    createRecipe(recipe)
       .then((response) => {
-        console.log(response);
+        console.log("RECIPE SAVED");
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const handleSave = () => {
-    createRecipe(recipe)
+  const handleSavePhoto = () => {
+    saveImage(recipe.image)
       .then((response) => {
+        console.log("IMAGE SAVED");
         toast.success("Recipe saved!", {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
@@ -86,9 +87,6 @@ function SearchRecipes() {
 
   return (
     <div className="recipes-layout">
-      <button className="btn btn-primary" onClick={handleSaveImage}>
-        TEST SAVE IMAGE
-      </button>
       <form className="form-column" onSubmit={handleSubmit}>
         <label>Type your ingredients to get your recipe</label>
         <input type="text" value={ingredients} onChange={handleInputChange} />
@@ -113,7 +111,7 @@ function SearchRecipes() {
               ) : (
                 <button
                   className="btn btn-primary"
-                  onClick={handleSave}
+                  onClick={handleSavePhoto}
                   disabled={!recipe}
                 >
                   Save
