@@ -75,6 +75,7 @@ module.exports.searchRecipes = (req, res, next) => {
     .post("https://api.openai.com/v1/completions", data, {
       headers: {
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Accept: "application/json",
       },
     })
     .then((response) => {
