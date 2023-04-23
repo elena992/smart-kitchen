@@ -1,14 +1,20 @@
 import "./Landing.css";
 import AuthContext from "../../contexts/AuthContext";
 import { useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { logout } from "../../stores/AccessTokenStore.js";
 
 const Landing = () => {
   const { currentUser } = useContext(AuthContext);
-  const Navigate = useNavigate();
 
   return (
     <div className="landing-page">
+      {currentUser && (
+        <div className="header">
+          <button className="btn btn-secondary logout-btn" onClick={logout}>
+            Logout
+          </button>
+        </div>
+      )}
       <div className="landing-page-content">
         {!currentUser ? (
           <div>
