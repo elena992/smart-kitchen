@@ -7,7 +7,7 @@
     width: 100%;
     max-width: 1200px;
     height: auto;
-  margin: 20px auto;
+    margin: 20px auto;
     margin-bottom: 50px;
     border-radius: 10px;
     overflow: hidden;
@@ -24,8 +24,7 @@
     width: 50%;
     height: 100%;
     object-fit: cover;
-    margin-left: 1%;
-    margin-top: 10px;
+    margin: 20px;
   }
   
   .card-recipe-body {
