@@ -6,10 +6,18 @@ module.exports.create = (req, res, next) => {
     req.body.photo = req.file.path;
   }
   const { name, servings, ingredients, instructions, photo, notes } = req.body;
+  let ingredientsArray = [];
+
+  if (Array.isArray(ingredients)) {
+    ingredientsArray = ingredients;
+  } else {
+    ingredientsArray = ingredients.split(" ");
+  }
+
   Recipe.create({
     name,
     servings,
-    ingredients,
+    ["ingredients"]: ingredientsArray,
     instructions,
     photo,
     notes,
