@@ -7,18 +7,26 @@ module.exports.create = (req, res, next) => {
   }
   const { name, servings, ingredients, instructions, photo, notes } = req.body;
   let ingredientsArray = [];
-
   if (Array.isArray(ingredients)) {
     ingredientsArray = ingredients;
   } else {
     ingredientsArray = ingredients.split(" ");
   }
 
+  let instructionsArray = [];
+  if (Array.isArray(instructions)) {
+    instructionsArray = instructions;
+  } else {
+    instructionsArray = instructions.split("\n");
+  }
+
+  console.log(instructions);
+
   Recipe.create({
     name,
     servings,
     ["ingredients"]: ingredientsArray,
-    instructions,
+    ["instructions"]: instructionsArray,
     photo,
     notes,
     owner: req.currentUserId,

@@ -110,7 +110,7 @@ const RecipeCreator = () => {
           <Input
             id="instructions"
             name="instructions"
-            type="text"
+            type="textarea"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.instructions}
