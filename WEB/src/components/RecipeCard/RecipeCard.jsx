@@ -21,7 +21,7 @@ const RecipeCard = ({ recipe, children }) => {
           </ul>
         </div>
         <div>
-          <h4>Steps</h4>
+          <h4>Method</h4>
           <ol>
             {recipe.instructions.map((ingredien, index) => (
               <li key={index}>{ingredien}</li>

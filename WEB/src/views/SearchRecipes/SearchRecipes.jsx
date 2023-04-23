@@ -65,6 +65,7 @@ function SearchRecipes() {
       .then((response) => {
         createRecipe({
           name: recipe.name,
+          servings: recipe.servings,
           ingredients: recipe.ingredients,
           instructions: recipe.instructions,
           notes: recipe.notes,
