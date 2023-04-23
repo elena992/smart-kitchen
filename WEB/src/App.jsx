@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Login from "./views/Login/Login";
@@ -11,9 +11,13 @@ import DetailRecipe from "./views/DetailRecipe/DetailRecipe";
 import Landing from "./views/Landing/Landing";
 
 function App() {
+  const location = useLocation();
+
+  // Check if the current route path is "login"
+  const isLanding = location.pathname === "/";
   return (
     <div className="App">
-      <Navbar />
+      {!isLanding && <Navbar />}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="signup" element={<Signup />} />
