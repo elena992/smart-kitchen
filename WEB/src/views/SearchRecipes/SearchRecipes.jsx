@@ -5,6 +5,8 @@ import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import { createRecipe, getImageFromPrompt } from "../../services/RecipeService";
 import LoadingIndicator from "../../components/LoadingIndicator/LoadingIndicator";
 import "./SearchRecipes.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SearchRecipes() {
   const [isLoadingRecipe, setIsLoadingRecipe] = useState(false);
@@ -59,7 +61,12 @@ function SearchRecipes() {
 
   const handleSave = () => {
     createRecipe(recipe)
-      .then((response) => {})
+      .then((response) => {
+        toast.success("Recipe saved!", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+        setRecipe(null);
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -98,6 +105,7 @@ function SearchRecipes() {
           </RecipeCard>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }
