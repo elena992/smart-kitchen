@@ -41,13 +41,6 @@ const Navbar = () => {
         ) : (
           <div className="navbar-end">
             <Link
-              to="/profile"
-              className="navbar-item"
-              onClick={handleMenuOpen}
-            >
-              Profile
-            </Link>
-            <Link
               to="/create-recipe"
               className="navbar-item"
               onClick={handleMenuOpen}
@@ -68,7 +61,16 @@ const Navbar = () => {
             >
               My Recipes
             </Link>
-            <button onClick={logout}>Logout</button>
+            <Link
+              to="/profile"
+              className="navbar-item"
+              onClick={handleMenuOpen}
+            >
+              Profile
+            </Link>
+            <button className="btn btn-secondary logout-btn" onClick={logout}>
+              Logout
+            </button>
           </div>
         )}
       </div>
