@@ -8,7 +8,6 @@ const DetailRecipe = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     getRecipeById(id)
@@ -22,9 +21,6 @@ const DetailRecipe = () => {
       });
   }, [id]);
 
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
 
   const handleDeleteClick = (id) => {
     const confirmed = window.confirm(
@@ -49,8 +45,13 @@ const DetailRecipe = () => {
         <div className="">
           <RecipeCard recipe={recipe}>
             <div className="d-flex justify-content-between">
-              <button onClick={handleEditClick} className="btn btn-primary">
-                Edit
+            <button
+                className="btn btn-primary"
+                onClick={() => {
+                  window.location.href = "/my-recipes";
+                }}
+              >
+               Back
               </button>
               <button
                 onClick={() => handleDeleteClick(recipe._id)}
