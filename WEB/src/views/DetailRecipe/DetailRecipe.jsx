@@ -3,6 +3,7 @@ import { getRecipeById, deleteRecipes } from "../../services/RecipeService.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import { useParams } from "react-router-dom";
 import "./DetailRecipe.css";
+import { RiDeleteBin6Line, RiArrowLeftSLine } from "react-icons/ri";
 
 const DetailRecipe = () => {
   const { id } = useParams();
@@ -20,7 +21,6 @@ const DetailRecipe = () => {
         setIsLoading(false);
       });
   }, [id]);
-
 
   const handleDeleteClick = (id) => {
     const confirmed = window.confirm(
@@ -45,19 +45,19 @@ const DetailRecipe = () => {
         <div className="">
           <RecipeCard recipe={recipe}>
             <div className="d-flex justify-content-between">
-            <button
+              <button
                 className="btn btn-primary"
                 onClick={() => {
                   window.location.href = "/my-recipes";
                 }}
               >
-               Back
+                <RiArrowLeftSLine />
               </button>
               <button
                 onClick={() => handleDeleteClick(recipe._id)}
                 className="btn btn-danger"
               >
-                Delete
+                <RiDeleteBin6Line />
               </button>
             </div>
           </RecipeCard>
