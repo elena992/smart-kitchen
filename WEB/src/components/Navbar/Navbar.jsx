@@ -67,13 +67,6 @@ const Navbar = () => {
             >
               My Recipes
             </Link>
-            <Link
-              to="/detail-recipe/:id"
-              className="navbar-item"
-              onClick={handleMenuOpen}
-            >
-              Detail Recipe
-            </Link>
             <button onClick={logout}>Logout</button>
           </div>
         )}
