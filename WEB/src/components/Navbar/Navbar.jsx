@@ -16,11 +16,8 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <div>
-          <img src={logo} alt="Logo" className="logo-navbar" />
-        </div>
         <Link to="/" className="navbar-item">
-          SMART KITCHEN
+          <img src={logo} alt="Logo" className="logo-navbar" />
         </Link>
         <div
           className={`navbar-burger ${menuOpen ? "is-active" : ""}`}

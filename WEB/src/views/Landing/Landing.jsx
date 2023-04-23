@@ -22,7 +22,6 @@ const Landing = () => {
             <div>
               <img src={logo} alt="Logo" className="logo" />
             </div>
-            <h1>Welcome to Smart Kitchen</h1>
             <div className="wrapper">
               <button
                 className="btn btn-primary"
@@ -47,8 +46,8 @@ const Landing = () => {
             <div>
               <img src={logo} alt="Logo" className="logo" />
             </div>
-            <h1>Welcome {currentUser.firstName} to Smart Kitchen</h1>
-            <h3>What do you want to do today?</h3>
+            <h2>Welcome {currentUser.firstName} </h2>
+            <h4>What do you want to do today?</h4>
             <div className="wrapper">
               <button
                 className="btn btn-primary"
