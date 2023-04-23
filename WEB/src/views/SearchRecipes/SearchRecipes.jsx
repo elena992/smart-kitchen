@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { saveImage, searchRecipes } from "../../services/RecipeService";
+import { savePhoto, searchRecipes } from "../../services/RecipeService";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import { createRecipe, getImageFromPrompt } from "../../services/RecipeService";
 import LoadingIndicator from "../../components/LoadingIndicator/LoadingIndicator";
@@ -29,7 +29,6 @@ function SearchRecipes() {
       searchRecipes(ingredients)
         .then((data) => {
           if (data && data.result) {
-            console.log(data.result);
             let json = JSON.parse(data.result);
             setRecipe(json);
             setIngredients("");
@@ -37,7 +36,6 @@ function SearchRecipes() {
             setIsLoadingRecipeImage(true);
             getImageFromPrompt(json.name)
               .then((data) => {
-                console.log(data.image);
                 setRecipe((prevRecipe) => {
                   return {
                     ...prevRecipe,
@@ -61,24 +59,25 @@ function SearchRecipes() {
     }
   };
 
-  const handleSaveRecipe = () => {
-    createRecipe(recipe)
-      .then((response) => {
-        console.log("RECIPE SAVED");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const handleSavePhoto = () => {
-    saveImage(recipe.image)
+    savePhoto(recipe.photo)
       .then((response) => {
-        console.log("IMAGE SAVED");
-        toast.success("Recipe saved!", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
-        setRecipe(null);
+        createRecipe({
+          name: recipe.name,
+          ingredients: recipe.ingredients,
+          instructions: recipe.instructions,
+          notes: recipe.notes,
+          photo: response.returnResult,
+        })
+          .then((response) => {
+            toast.success("Recipe saved!", {
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+            setRecipe(null);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);

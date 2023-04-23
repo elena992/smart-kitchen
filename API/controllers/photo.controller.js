@@ -7,20 +7,18 @@ cloudinary.config({
 });
 
 module.exports.savePhoto = (req, res, next) => {
-  console.log("SAVE PHOTO");
-  console.log(req.body);
-  let url = req.body;
+  let url = req.body.photo;
 
   const options = {
     folder: "smart-kitchen",
-    public_id: "my_image_id",
   };
 
   cloudinary.uploader.upload(url, options, (error, result) => {
     if (error) {
       console.error(error);
     } else {
-      console.log(result);
+      let returnResult = result.url;
+      res.json({ returnResult });
     }
   });
 };
