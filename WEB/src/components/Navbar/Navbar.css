@@ -66,3 +66,7 @@
   .navbar-menu.is-active {
     display: block;
   }
+
+  .logo-navbar{
+    height: 70px;
+  }

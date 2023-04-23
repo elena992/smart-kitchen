@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext";
 import { logout } from "../../stores/AccessTokenStore";
 import "./Navbar.css";
+import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
@@ -15,6 +16,9 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
+        <div>
+          <img src={logo} alt="Logo" className="logo-navbar" />
+        </div>
         <Link to="/" className="navbar-item">
           SMART KITCHEN
         </Link>
