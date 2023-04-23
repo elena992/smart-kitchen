@@ -20,8 +20,6 @@ module.exports.create = (req, res, next) => {
     instructionsArray = instructions.split("\n");
   }
 
-  console.log(instructions);
-
   Recipe.create({
     name,
     servings,
@@ -65,11 +63,11 @@ module.exports.getRecipeById = (req, res, next) => {
 
 module.exports.searchRecipes = (req, res, next) => {
   const { ingredients } = req.body;
-  const prompt = `Give me some recipe ideas using the following ingredients: ${ingredients} in this {"name":"","servings":0,"ingredients":[""],"instructions":[""],"notes":""} json format.`;
+  const prompt = `Give me some recipe ideas using the following ingredients: ${ingredients} in this json format "{"name":"","servings":0,"ingredients":[""],"instructions":[""],"notes":""}" .`;
   const data = {
     prompt: prompt,
     model: "text-davinci-003",
-    max_tokens: 2000,
+    max_tokens: 4000,
     temperature: 0,
   };
 
@@ -77,6 +75,7 @@ module.exports.searchRecipes = (req, res, next) => {
     .post("https://api.openai.com/v1/completions", data, {
       headers: {
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Accept: "application/json",
       },
     })
     .then((response) => {
