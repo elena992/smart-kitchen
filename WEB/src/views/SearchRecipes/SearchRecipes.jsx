@@ -74,17 +74,20 @@ function SearchRecipes() {
 
   return (
     <div className="container my-3">
-      <form onSubmit={handleSubmit}>
-        <label>
-          Type your ingredients to get your recipe
-          <input type="text" value={ingredients} onChange={handleInputChange} />
-        </label>
+      <form className="form-column" onSubmit={handleSubmit}>
+        <label>Type your ingredients to get your recipe</label>
+        <input type="text" value={ingredients} onChange={handleInputChange} />
         {isLoadingRecipe ? (
-          <LoadingIndicator></LoadingIndicator>
+          <div className="loading">
+            <LoadingIndicator></LoadingIndicator>
+          </div>
         ) : (
-          <button type="submit">Search</button>
+          <button className="btn btn-primary" type="submit">
+            Search
+          </button>
         )}
       </form>
+
       {error && <p className="error">{error}</p>}
       {recipe && (
         <div className="">

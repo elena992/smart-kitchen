@@ -1,9 +1,11 @@
-.save-button {
-    background-color: green;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
+
+  .form-column{
+    gap: 10px; 
+      display: flex;
+      flex-direction: column;
+    
   }
-  
+
+  .loading{
+    align-self: center
+  }
