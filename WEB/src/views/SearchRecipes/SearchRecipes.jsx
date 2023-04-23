@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import { searchRecipes } from "../../services/RecipeService";
+import { savePhoto, searchRecipes } from "../../services/RecipeService";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import { createRecipe, getImageFromPrompt } from "../../services/RecipeService";
 import LoadingIndicator from "../../components/LoadingIndicator/LoadingIndicator";
@@ -37,7 +37,6 @@ function SearchRecipes() {
             setIsLoadingRecipeImage(true);
             getImageFromPrompt(json.name)
               .then((data) => {
-                console.log(data.image);
                 setRecipe((prevRecipe) => {
                   return {
                     ...prevRecipe,
@@ -60,13 +59,28 @@ function SearchRecipes() {
     }
   };
 
-  const handleSave = () => {
-    createRecipe(recipe)
+  const handleSavePhoto = () => {
+    setIsLoadingRecipeImage(true);
+    savePhoto(recipe.photo)
       .then((response) => {
-        toast.success("Recipe saved!", {
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
-        setRecipe(null);
+        createRecipe({
+          name: recipe.name,
+          ingredients: recipe.ingredients,
+          instructions: recipe.instructions,
+          notes: recipe.notes,
+          photo: response.returnResult,
+        })
+          .then((response) => {
+            toast.success("Recipe saved!", {
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+            setRecipe(null);
+            setIsLoadingRecipeImage(false);
+          })
+          .catch((err) => {
+            setIsLoadingRecipeImage(false);
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -99,7 +113,7 @@ function SearchRecipes() {
               ) : (
                 <button
                   className="btn btn-primary"
-                  onClick={handleSave}
+                  onClick={handleSavePhoto}
                   disabled={!recipe}
                 >
                   Save

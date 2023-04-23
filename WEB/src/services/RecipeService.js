@@ -21,7 +21,8 @@ export const getRecipeById = (id) =>
 export const getImageFromPrompt = (prompt) =>
   authenticatedHttp.post("/recipes/search-image", { prompt });
 
- /*export const updateRecipe = (id, recipe) =>
-  authenticatedHttp.patch(`/detail-recipes/${id}`, recipe); */
+export const deleteRecipes = (id) =>
+  authenticatedHttp.delete(`/recipes/delete/${id}`);
 
-  export const deleteRecipes = (id) => authenticatedHttp.delete(`/recipes/delete/${id}`);
+export const savePhoto = (photo) =>
+  authenticatedHttp.post("/recipes/save-image", { photo });
