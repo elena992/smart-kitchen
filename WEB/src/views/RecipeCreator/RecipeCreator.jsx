@@ -6,6 +6,8 @@ import Input from "../../components/Input/Input";
 import { createRecipe } from "../../services/RecipeService";
 import { recipeSchema } from "../../schemas/recipes.schema";
 import "./RecipeCreator.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialValues = {
   name: "",
@@ -44,6 +46,9 @@ const RecipeCreator = () => {
       createRecipe(formData)
         .then((response) => {
           resetForm();
+          toast.success("Recipe created!", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -157,6 +162,8 @@ const RecipeCreator = () => {
         >
           {isSubmitting ? "Loading..." : "Create"}
         </button>
+
+        <ToastContainer />
       </form>
     </div>
   );
